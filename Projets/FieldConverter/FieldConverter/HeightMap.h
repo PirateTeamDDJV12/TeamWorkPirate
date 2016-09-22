@@ -22,12 +22,16 @@ namespace FieldConverter
         enum
         {
             MIN_HEIGHT = 0,
-            MAX_HEIGHT = 255
+            MAX_HEIGHT = 255,
+            DEFAULT_WIDTH = 257,
+            DEFAULT_HEIGHT = 257,
         };
 
+
     private:
-        unsigned int m_Width;
-        unsigned int m_Height;
+        unsigned int m_width;
+        unsigned int m_height;
+        unsigned int m_totalSize;
 
         uint8_t* m_grayscalePixelArray;
         
@@ -40,7 +44,7 @@ namespace FieldConverter
         */
         HeightMap(const std::string& pathFile);
         HeightMap(const HeightMap& copy);
-        HeightMap(HeightMap&& destructiveMovedSample);
+        HeightMap(HeightMap&& destructiveMovedSample) noexcept;
 
         ~HeightMap()
         {
@@ -82,7 +86,7 @@ namespace FieldConverter
         */
         unsigned int size() const noexcept
         {
-            return m_Height * m_Width;
+            return m_totalSize;
         }
 
         /*
@@ -91,7 +95,7 @@ namespace FieldConverter
         */
         unsigned int width() const noexcept
         {
-            return m_Width;
+            return m_width;
         }
 
         /*
@@ -100,13 +104,24 @@ namespace FieldConverter
         */
         unsigned int height() const noexcept
         {
-            return m_Height;
+            return m_height;
         }
 
 
     private:
         void load(const std::string& pathFile);
 
+        void swap(HeightMap& autre) noexcept;
+
+        uint8_t* begin() const noexcept
+        {
+            return m_grayscalePixelArray;
+        }
+
+        uint8_t* end() const noexcept
+        {
+            return m_grayscalePixelArray + m_totalSize;
+        }
 
     public:
         HeightMap& operator=(const HeightMap& other);
