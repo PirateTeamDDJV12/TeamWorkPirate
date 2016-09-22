@@ -1,3 +1,6 @@
+/*
+Created by Sun-lay gagneux
+*/
 #include "Vertex.h"
 
 
@@ -23,4 +26,3 @@ std::string Vertex::toString() const noexcept
 
     return intermediaryStr.str();
 }
-
