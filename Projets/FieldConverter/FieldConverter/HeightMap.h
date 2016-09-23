@@ -21,10 +21,10 @@ namespace FieldConverter
     public:
         enum
         {
-            MIN_HEIGHT = 0,
-            MAX_HEIGHT = 255,
-            DEFAULT_WIDTH = 257,
-            DEFAULT_HEIGHT = 257,
+            MIN_Z_HEIGHT = 0,
+            MAX_Z_HEIGHT = 255,
+            DEFAULT_HEIGHTMAP_IMAGE_WIDTH = 257,
+            DEFAULT_HEIGHTMAP_IMAGE_HEIGHT = 257,
         };
 
 

@@ -10,8 +10,8 @@ using namespace FieldConverter;
 
 
 HeightMap::HeightMap(const std::string& pathFile) : 
-    m_width{DEFAULT_WIDTH},
-    m_height{DEFAULT_HEIGHT}
+    m_width{DEFAULT_HEIGHTMAP_IMAGE_WIDTH},
+    m_height{DEFAULT_HEIGHTMAP_IMAGE_HEIGHT}
 {
     m_totalSize = m_width * m_height;
 
