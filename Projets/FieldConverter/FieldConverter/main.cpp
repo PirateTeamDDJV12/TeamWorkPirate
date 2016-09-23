@@ -5,10 +5,13 @@ Created by Sun-lay gagneux
 
 #include "HeightMap.h"
 
+#include "Triangle.h"
+
 
 #include <iostream>
 
 #include <algorithm>
+
 
 
 
@@ -82,6 +85,10 @@ int main()
     }
 
     cout << endl;
+
+    Triangle triangle(10, 5, 2);
+
+    cout << triangle.toString();
 
   /*  LireFichierHeightmap();
     ConstruireTerrain(float echelleXY, float echelleZ);
