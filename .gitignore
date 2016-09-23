@@ -1,0 +1,14 @@
+*.db
+*.opendb
+*.vcxproj.user
+
+*.vs
+
+Projets/*/*/Debug/*
+Projets/*/Debug/*
+
+Projets/*/*/Release/*
+Projets/*/Release/*
+
+Projets/*/*/x64/*
+Projets/*/x64/*
