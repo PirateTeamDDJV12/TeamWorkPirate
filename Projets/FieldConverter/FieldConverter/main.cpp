@@ -3,9 +3,12 @@ Created by Sun-lay gagneux
 */
 #include "Vertex.h"
 
+#include "HeightMap.h"
+
 
 #include <iostream>
 
+#include <algorithm>
 
 
 
@@ -53,6 +56,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
 
 int main()
 {
+    /*
     Vect3f vect1;
     Vect3f vect2(10, 5, 5);
 
@@ -68,7 +72,16 @@ int main()
 
 
     Vertex vertexSample;
+    */
+    
+    HeightMap heightmapFile("Ressources/TestHeightMap.raw");
 
+    for (int i = 0; i < heightmapFile.size(); i++)
+    {
+        cout << heightmapFile[i];
+    }
+
+    cout << endl;
 
   /*  LireFichierHeightmap();
     ConstruireTerrain(float echelleXY, float echelleZ);

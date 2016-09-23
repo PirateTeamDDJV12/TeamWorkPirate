@@ -3,6 +3,7 @@ Created by Sun-lay Gagneux
 */
 #include "HeightMap.h"
 
+#include <algorithm>
 #include <fstream>
 
 using namespace FieldConverter;
@@ -15,14 +16,13 @@ HeightMap::HeightMap(const std::string& pathFile) :
     m_totalSize = m_width * m_height;
 
     m_grayscalePixelArray = new uint8_t[m_totalSize];
-    std::fill(begin(), end(), MIN_HEIGHT);
     
     load(pathFile);
 }
 
 HeightMap::HeightMap(const HeightMap& copy)
 {
-    std::copy(begin(), end(), begin());
+    std::copy(begin(), end(), m_grayscalePixelArray);
 }
 
 HeightMap::HeightMap(HeightMap&& destructiveMovedSample) noexcept:
@@ -55,14 +55,25 @@ void HeightMap::load(const std::string& pathFile)
     using std::ios;
     using std::copy;
     
-    ifstream reader(pathFile);
+    ifstream reader(pathFile, ios::binary);
 
-    copy(istreambuf_iterator<char>{ifstream{ "in.txt", ios::binary }}, 
-         istreambuf_iterator<char>{}, 
-         [this](int iter) {
-            return (m_grayscalePixelArray + iter);
-         }
-    );
+    if (reader.bad() || reader.eof())
+    {
+        throw ErrorLoadingHeightMap{};
+    }
+
+    size_t iter = 0;
+
+    /*std::for_each(
+        begin(), 
+        end(), 
+        [&](unsigned int) {
+            reader. >> m_grayscalePixelArray[iter];
+            iter++;
+        }
+    );*/
+
+    reader.read(reinterpret_cast<char*>(m_grayscalePixelArray), size());
 }
 
 void HeightMap::swap(HeightMap& autre) noexcept// permutter les état de this avec ceux de autre
