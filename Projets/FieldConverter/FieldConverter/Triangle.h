@@ -17,6 +17,7 @@ namespace FieldConverter
     private:
         using iterator = unsigned int*;
 
+
     public:
         enum
         {
@@ -56,6 +57,7 @@ namespace FieldConverter
 
 
         std::string toString() const noexcept;
+
 
     private:
         iterator begin() const noexcept
