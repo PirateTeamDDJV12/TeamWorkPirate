@@ -16,6 +16,9 @@ namespace FieldConverter
     }
 
 
+    /*
+    Triangle array that stores all triangles mapped by indexes to form a plane.
+    */
     class TriangleArray
     {
     private:
@@ -43,6 +46,7 @@ namespace FieldConverter
             {}
         };
 
+
     private:
         Triangle* m_buffer;
         size_t m_numberOfPolygone;
@@ -52,6 +56,10 @@ namespace FieldConverter
 
 
     public:
+        /*
+        * widthColumnVertex : Number of vertex in the map width 
+        * heightRowVertex : Number of vertex in the map height
+        */
         TriangleArray(size_t widthColumnVertex, size_t heightRowVertex) noexcept;
         
         TriangleArray(const TriangleArray& other);
@@ -70,29 +78,47 @@ namespace FieldConverter
 
 
     public:
+        /*
+        Get the triangle at the specified index
+        */
         Triangle at(size_t index) const noexcept;
         Triangle& at(size_t index) noexcept;
 
+        /*
+        Return the total number of polygone (triangle) inside the map
+        */
         size_t numberOfPolygone() const noexcept
         {
             return m_numberOfPolygone;
         }
 
+        /*
+        Return the number of polygone (triangle) in one row (Nb column * 2)
+        */
         size_t numberOfPolygoneInColumn() const noexcept
         {
             return m_numberOfColumn * 2;
         }
 
+        /*
+        Return the number of polygone (triangle) in one column (Nb row * 2)
+        */
         size_t numberOfPolygoneInRow() const noexcept
         {
             return m_numberOfRow * 2;
         }
 
+        /*
+        Return the number of tiles in 1 row
+        */
         size_t numberOfTilesInColumn() const noexcept
         {
             return m_numberOfColumn;
         }
 
+        /*
+        Return the number of tiles in 1 column
+        */
         size_t numberOfTilesInRow() const noexcept
         {
             return m_numberOfRow;
@@ -113,6 +139,9 @@ namespace FieldConverter
 
         void swap(TriangleArray& other) noexcept;
 
+        /*
+        Return a string containing each triangle in a column
+        */
         std::string toString() const noexcept;
 
 
@@ -120,6 +149,7 @@ namespace FieldConverter
         void fillFast(size_t widthColumnVertex) noexcept;
 
         void fillByTile(const Tile& tile, Triangle& upperTriangle, Triangle& downerTriangle) noexcept;
+
 
     public:
         Triangle& operator[](size_t index) noexcept;

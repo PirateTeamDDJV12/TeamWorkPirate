@@ -12,6 +12,9 @@ Created by Sun-lay Gagneux
 
 namespace FieldConverter
 {
+    /*
+    A triangle class that contains only 3 indexes (not the specific value of vertex)
+    */
     class Triangle
     {
     private:
