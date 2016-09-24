@@ -55,6 +55,21 @@ namespace FieldConverter
             return m_indexToVertex[2];
         }
 
+        unsigned int& firstPointIndex() noexcept
+        {
+            return *m_indexToVertex;
+        }
+
+        unsigned int& secondPointIndex() noexcept
+        {
+            return m_indexToVertex[1];
+        }
+
+        unsigned int& thirdPointIndex() noexcept
+        {
+            return m_indexToVertex[2];
+        }
+
 
         std::string toString() const noexcept;
 
@@ -68,6 +83,19 @@ namespace FieldConverter
         iterator end() const noexcept
         {
             return const_cast<iterator>(m_indexToVertex + VERTEX_NUMBER);
+        }
+
+
+    public:
+        bool operator==(Triangle& other) const noexcept
+        {
+            return ((firstPointIndex() == other.firstPointIndex()) && secondPointIndex() == other.secondPointIndex() && 
+                    thirdPointIndex() == other.thirdPointIndex());
+        }
+
+        bool operator!=(Triangle& other) const noexcept
+        {
+            return (!(*this == other));
         }
     };
 }
