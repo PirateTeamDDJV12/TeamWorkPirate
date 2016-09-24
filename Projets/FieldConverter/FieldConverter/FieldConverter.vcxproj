@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="TriangleArray.cpp" />
+    <ClCompile Include="UnitaryTestTriangleArray.cpp" />
     <ClCompile Include="Vect3f.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="TriangleArray.h" />
+    <ClInclude Include="UnitaryTestTriangleArray.h" />
     <ClInclude Include="Vect3f.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
