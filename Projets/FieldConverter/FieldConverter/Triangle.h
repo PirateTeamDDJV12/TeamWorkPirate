@@ -55,6 +55,21 @@ namespace FieldConverter
             return m_indexToVertex[2];
         }
 
+        unsigned int& firstPointIndex() noexcept
+        {
+            return *m_indexToVertex;
+        }
+
+        unsigned int& secondPointIndex() noexcept
+        {
+            return m_indexToVertex[1];
+        }
+
+        unsigned int& thirdPointIndex() noexcept
+        {
+            return m_indexToVertex[2];
+        }
+
 
         std::string toString() const noexcept;
 
