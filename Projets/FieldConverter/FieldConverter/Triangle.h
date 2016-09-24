@@ -84,6 +84,19 @@ namespace FieldConverter
         {
             return const_cast<iterator>(m_indexToVertex + VERTEX_NUMBER);
         }
+
+
+    public:
+        bool operator==(Triangle& other) const noexcept
+        {
+            return ((firstPointIndex() == other.firstPointIndex()) && secondPointIndex() == other.secondPointIndex() && 
+                    thirdPointIndex() == other.thirdPointIndex());
+        }
+
+        bool operator!=(Triangle& other) const noexcept
+        {
+            return (!(*this == other));
+        }
     };
 }
 

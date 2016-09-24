@@ -10,8 +10,18 @@ namespace FieldConverter
 {
     class Triangle;
 
+    namespace UnitaryTest
+    {
+        class TriangleArrayUnitTest;
+    }
+
+
     class TriangleArray
     {
+    private:
+        friend class UnitaryTest::TriangleArrayUnitTest;
+
+
     public:
         using iterator = Triangle*;
         using const_iterator = const Triangle*;
@@ -42,12 +52,21 @@ namespace FieldConverter
 
 
     public:
-        TriangleArray(unsigned int widthColumnVertex, unsigned int heightRowVertex) noexcept;
+        TriangleArray(size_t widthColumnVertex, size_t heightRowVertex) noexcept;
         
         TriangleArray(const TriangleArray& other);
         TriangleArray(TriangleArray&& other);
 
         ~TriangleArray() noexcept;
+
+
+    private:
+        TriangleArray(Triangle* buffer, size_t numberOfPolygone, size_t numberOfColumn, size_t numberOfRow) noexcept :
+            m_numberOfPolygone{ numberOfPolygone },
+            m_numberOfColumn{ numberOfColumn },
+            m_numberOfRow{ numberOfRow },
+            m_buffer{ buffer }
+        {}
 
 
     public:
@@ -98,7 +117,7 @@ namespace FieldConverter
 
 
     private:
-        void fillFast(unsigned int widthColumnVertex, unsigned int heightRowVertex) noexcept;
+        void fillFast(size_t widthColumnVertex) noexcept;
 
         void fillByTile(const Tile& tile, Triangle& upperTriangle, Triangle& downerTriangle) noexcept;
 

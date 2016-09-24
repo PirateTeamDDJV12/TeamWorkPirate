@@ -12,7 +12,7 @@ Created by Sun-lay Gagneux
 using namespace FieldConverter;
 
 
-TriangleArray::TriangleArray(unsigned int widthColumnVertex, unsigned int heightRowVertex) noexcept :
+TriangleArray::TriangleArray(size_t widthColumnVertex, size_t heightRowVertex) noexcept :
     m_numberOfColumn{widthColumnVertex - 1},
     m_numberOfRow{heightRowVertex - 1}
 {
@@ -20,10 +20,14 @@ TriangleArray::TriangleArray(unsigned int widthColumnVertex, unsigned int height
 
     m_buffer = new Triangle[m_numberOfPolygone];
 
-    fillFast(widthColumnVertex, heightRowVertex);
+    fillFast(widthColumnVertex);
 }
 
-TriangleArray::TriangleArray(const TriangleArray& other)
+TriangleArray::TriangleArray(const TriangleArray& other) :
+    m_numberOfColumn{ other.m_numberOfColumn },
+    m_numberOfRow{ other.m_numberOfRow },
+    m_numberOfPolygone{ other.m_numberOfPolygone },
+    m_buffer{ new Triangle[other.m_numberOfPolygone] }
 {
     std::copy(other.begin(), other.end(), m_buffer);
 }
@@ -124,17 +128,18 @@ void TriangleArray::fillByTile(const Tile& tile, Triangle& upperTriangle, Triang
     downerTriangle.thirdPointIndex()  = tile.m_vertexDownRight;
 }
 
-void TriangleArray::fillFast(unsigned int widthColumnVertex, unsigned int heightRowVertex) noexcept
+void TriangleArray::fillFast(size_t widthColumnVertex) noexcept
 {
     iterator current = begin();
     const_iterator endArray = end();
 
     unsigned int currentTile = 0;
+    size_t jumpMapping = (widthColumnVertex - 2);
 
-    static auto function = [&currentTile, &widthColumnVertex, &heightRowVertex, this](Triangle* index) {
-        Tile intermediary(currentTile, currentTile + 1, currentTile + widthColumnVertex, currentTile + widthColumnVertex + 1);
+    static auto function = [&currentTile, &widthColumnVertex, &jumpMapping, this](Triangle* index) {
+        Tile intermediary(currentTile, (currentTile + 1), (currentTile + widthColumnVertex), (currentTile + widthColumnVertex + 1));
         fillByTile(intermediary, *index, *(index + 1));
-        currentTile++;
+        currentTile += (((currentTile % widthColumnVertex) == jumpMapping) ? 2 : 1);
     };
 
     for (; current != endArray; current += 2)
