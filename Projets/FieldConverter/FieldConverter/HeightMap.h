@@ -106,6 +106,8 @@ namespace FieldConverter
         {
             return m_height;
         }
+        int min_z();
+        void rescale(float scale);
 
 
     private:
@@ -146,8 +148,8 @@ namespace FieldConverter
         {
             return m_grayscalePixelArray[columnIndex * rowIndex];
         }
+
     };
 }
-
 
 #endif //!HEIGHTMAP_H
