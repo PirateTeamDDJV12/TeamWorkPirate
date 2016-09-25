@@ -81,7 +81,7 @@ void HeightMap::load(const std::string& pathFile)
     reader.read(reinterpret_cast<char*>(m_grayscalePixelArray), size());
 }
 
-void HeightMap::swap(HeightMap& autre) noexcept// permutter les état de this avec ceux de autre
+void HeightMap::swap(HeightMap& autre) noexcept
 {
     using std::swap;
 

@@ -5,7 +5,6 @@
 using namespace FieldConverter;
 
 
-
 VertexArray::VertexArray(const HeightMap& heightmap, float scale) : m_scale{ scale }, m_heightMap{ heightmap }, m_nbVertices{ heightmap.size() }
 {
     for (int i = 0; i < m_nbVertices; i++)
@@ -15,7 +14,7 @@ VertexArray::VertexArray(const HeightMap& heightmap, float scale) : m_scale{ sca
             heightmap.at(i));
         // On calcule la normale de chaque point (pas fait, pour l'instant 0,0,1)
         
-        m_vertices.push_back(Vertex(pos.x(),pos.y(),pos.z(),1,1,0));
+        m_vertices.push_back(Vertex(pos.x(),pos.y(),pos.z(),0,0,1));
     }
     VertexArray::offset();
     VertexArray::scale();
@@ -31,6 +30,7 @@ void VertexArray::scale()
 
 void VertexArray::offset()
 {
+    /*Looking for smallest z*/
     float min = m_vertices[0].position().z();
 
     for (int i = 1; i < m_nbVertices; i++)
@@ -40,7 +40,7 @@ void VertexArray::offset()
             min = m_vertices[i].position().z();
         }
     }
-
+    /*substract min to each z*/
     for (int i = 0; i < m_nbVertices; i++)
     {
         m_vertices[i].position().z(m_vertices[i].position().z() - min);
