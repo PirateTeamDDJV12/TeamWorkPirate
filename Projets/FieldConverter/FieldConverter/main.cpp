@@ -85,15 +85,34 @@ int main()
 
     /* convertir en VertexArray*/
     VertexArray vArray = VertexArray(heightmapFile, 0.3f);
-    std::vector<float> vList = vArray.getArray();
-    for (int i = 0;i < heightmapFile.size();i++)
+    std::vector<Vertex> vList = vArray.getArray();
+   /* for (int i = 0;i < heightmapFile.size();i++)
     {
         //if (i % 3 == 2)
         {
-            cout << vList[i];
+            cout << vList[i].position().x();
+            cout << " ";
+            cout << vList[i].position().y();
+            cout << " ";
+            cout << vList[i].position().z();
+            cout << endl;
+        }
+    }*/
+
+    for (int i = 0; i < heightmapFile.size(); i++)
+    {
+        if (vList[i].position().z() < 0.f)
+        {
+            cout << vList[i].position().x();
+            cout << " ";
+            cout << vList[i].position().y();
+            cout << " ";
+            cout << vList[i].position().z();
             cout << endl;
         }
     }
+
+
   /*  LireFichierHeightmap();
     ConstruireTerrain(float echelleXY, float echelleZ);
     CalculerNormales();

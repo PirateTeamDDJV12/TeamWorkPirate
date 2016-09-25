@@ -106,8 +106,7 @@ namespace FieldConverter
         {
             return m_height;
         }
-        int min_z();
-        void rescale(float scale);
+
 
 
     private:

@@ -1,20 +1,24 @@
 #ifndef VERTEXARRAY_H
 #define VERTEXARRAY_H
-#include "HeightMap.h"
+
 #include "Vertex.h"
 #include <vector>
 
 namespace FieldConverter
 {
+    class TriangleArray;
+    class HeightMap;
+
     class VertexArray
     {
     private:
-        HeightMap  m_heightMap;
+        const HeightMap&  m_heightMap;
         float m_scale;
         unsigned int m_nbVertices;
         std::vector<Vertex> m_vertices;
+
     public:
-        VertexArray(HeightMap heightmap, float scale);
+        VertexArray(const HeightMap& heightmap, float scale);
 
         ~VertexArray()
         {
@@ -24,6 +28,8 @@ namespace FieldConverter
         /*Return list or Vertices*/
         std::vector<Vertex> getArray() const noexcept;
 
+
+        void computeNormal(const TriangleArray& mapping) noexcept;
 
     private:
         /*Rescale z data*/
