@@ -4,7 +4,7 @@
 #include "HeightMap.h"
 #include "Vertex.h"
 #include <cstdint>
-
+#include <vector>
 //#include <string>
 //#include <memory.h>
 namespace FieldConverter
@@ -13,23 +13,33 @@ namespace FieldConverter
     {
     private:
         HeightMap  m_heightMap;
-        int m_scale;
+        float m_scale;
         int m_nbVertices;
-        int* m_vertices[3];
+        std::vector<float> m_vertices;
     public:
-        VertexArray(HeightMap heightmap, int scale) :m_scale{ scale }, m_heightMap{ heightmap }, m_nbVertices{heightmap.size()/3}
+
+        VertexArray(HeightMap heightmap, float scale) :m_scale{ scale }, m_heightMap{ heightmap }, m_nbVertices{static_cast<int>(heightmap.size())}
         {
-            for (int i = 0; i < 2; i++)
+                       for (int i = 0; i < m_nbVertices; i++)
             {
-                m_vertices[i] = new int[m_nbVertices];
+                m_vertices.push_back(heightmap.at(i));
             }
         }
 
-        auto getArray();
+        ~VertexArray()
+        {
+            m_vertices.clear();
+        }
+
+        /*Return list or Vertices after scaling*/
+        std::vector<float> getArray();
 
 
     private:
+        /*Rescale z data*/
         void scale();
+
+        /*Put smallest z to 0*/
         void offset();
     };
 }

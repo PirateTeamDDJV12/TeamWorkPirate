@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="VertexArray.cpp" />
     <ClCompile Include="Vect3f.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="Vect3f.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

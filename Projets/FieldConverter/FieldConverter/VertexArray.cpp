@@ -1,38 +1,43 @@
 #include "VertexArray.h"
+#include <vector>
 using namespace FieldConverter;
 
 void VertexArray::scale()
 {
     for (int i = 0; i < m_nbVertices; i++)
-    {
-        m_vertices[i][3] = m_vertices[i][3] * m_scale;
+    {   //if (i%3==2)
+        m_vertices[i] = m_vertices[i] * m_scale;
     }
           
-    
+
+
 }
 void VertexArray::offset()
 {
-    //Rechercher le minimum sur z.
-    float min = m_vertices[0][3];
+    //Looking for Vertex with smallest Z
+    float min = m_vertices[2];
     int indice_min = 0;
-    for (int i = 1;i < m_nbVertices;i++)
+    for (int i = 1;i < m_nbVertices/3;i++)
     {
-         if (m_vertices[i][3] < min)
-            {
-                min = m_vertices[i][3];
-                indice_min = i;
-            }
+        if (m_vertices[i] < min )//&& i%3==2)
+        {
+            min = m_vertices[i];
+            indice_min = i;
+        }
     }
     for (int i = 0;i < m_nbVertices;i++)
     {
-        m_vertices[i][3] = m_vertices[i][3] - min;
-    }
-
-    auto getArray()
-    {
-        
-        offset(m_nbVertices);
-        scale(m_nbVertices);
-        return m_nbVertices;
+      //  if (i % 3 == 2)
+        {
+            m_vertices[i] = m_vertices[i] - min;
+        }
     }
 }
+    std::vector<float> VertexArray::getArray()
+    {
+        
+        offset();
+        scale();
+        return m_vertices;
+
+    }

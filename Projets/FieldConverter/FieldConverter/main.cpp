@@ -4,7 +4,7 @@ Created by Sun-lay gagneux
 #include "Vertex.h"
 
 #include "HeightMap.h"
-
+#include "VertexArray.h"
 
 #include <iostream>
 
@@ -76,13 +76,24 @@ int main()
     
     HeightMap heightmapFile("Ressources/TestHeightMap.raw");
 
-    for (int i = 0; i < heightmapFile.size(); i++)
+   /* for (int i = 0; i < heightmapFile.size(); i++)
     {
         cout << heightmapFile[i];
     }
 
-    cout << endl;
+    cout << endl;*/
 
+    /* convertir en VertexArray*/
+    VertexArray vArray = VertexArray(heightmapFile, 0.3f);
+    std::vector<float> vList = vArray.getArray();
+    for (int i = 0;i < heightmapFile.size();i++)
+    {
+        //if (i % 3 == 2)
+        {
+            cout << vList[i];
+            cout << endl;
+        }
+    }
   /*  LireFichierHeightmap();
     ConstruireTerrain(float echelleXY, float echelleZ);
     CalculerNormales();
