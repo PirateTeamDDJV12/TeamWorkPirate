@@ -1,43 +1,41 @@
 #include "VertexArray.h"
+#include "HeightMap.h"
+#include "Vertex.h"
+#include "Vect3f.h"
 #include <vector>
+#include <stdlib.h>
 using namespace FieldConverter;
 
-void VertexArray::scale()
+
+
+VertexArray::VertexArray(HeightMap heightmap, float scale) : m_scale{ scale }, m_heightMap{ heightmap }, m_nbVertices{ heightmap.size() }
 {
     for (int i = 0; i < m_nbVertices; i++)
-    {   //if (i%3==2)
+    {
+        Vect3f pos = new Vect3f(i%HeightMap::DEFAULT_HEIGHTMAP_IMAGE_WIDTH,div(i,HeightMap::DEFAULT_HEIGHTMAP_IMAGE_HEIGHT).quot+1,heightmap.at(i));
+
+        m_vertices.push_back(new Vertex);
+    }
+    VertexArray::offset();
+    VertexArray::scale();
+}
+    void VertexArray::scale()
+{
+    for (int i = 0; i < m_nbVertices; i++)
+    {   
         m_vertices[i] = m_vertices[i] * m_scale;
     }
-          
-
-
 }
+
 void VertexArray::offset()
 {
-    //Looking for Vertex with smallest Z
-    float min = m_vertices[2];
-    int indice_min = 0;
-    for (int i = 1;i < m_nbVertices/3;i++)
-    {
-        if (m_vertices[i] < min )//&& i%3==2)
-        {
-            min = m_vertices[i];
-            indice_min = i;
-        }
-    }
     for (int i = 0;i < m_nbVertices;i++)
-    {
-      //  if (i % 3 == 2)
-        {
-            m_vertices[i] = m_vertices[i] - min;
-        }
-    }
+     {   
+         m_vertices[i][3] = m_vertices[i][3] - HeightMap::MIN_Z_HEIGHT;
+     }
 }
-    std::vector<float> VertexArray::getArray()
-    {
-        
-        offset();
-        scale();
-        return m_vertices;
 
-    }
+    std::vector<float[3]> VertexArray::getArray() const noexcept
+{
+    return m_vertices;
+}
