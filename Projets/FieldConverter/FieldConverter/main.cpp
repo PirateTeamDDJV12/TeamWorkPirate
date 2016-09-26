@@ -4,6 +4,7 @@ Created by Sun-lay gagneux
 #include "Vertex.h"
 
 #include "HeightMap.h"
+#include "VertexArray.h"
 /*
 #include "Triangle.h"
 #include "TriangleArray.h"
@@ -82,12 +83,42 @@ int main()
     /*
     HeightMap heightmapFile("Ressources/TestHeightMap.raw");
 
-    for (int i = 0; i < heightmapFile.size(); i++)
+   /* for (int i = 0; i < heightmapFile.size(); i++)
     {
         cout << heightmapFile[i];
     }
 
-    cout << endl;
+    cout << endl;*/
+
+    /* convertir en VertexArray*/
+    VertexArray vArray = VertexArray(heightmapFile, 0.3f);
+    std::vector<Vertex> vList = vArray.getArray();
+   /* for (int i = 0;i < heightmapFile.size();i++)
+    {
+        //if (i % 3 == 2)
+        {
+            cout << vList[i].position().x();
+            cout << " ";
+            cout << vList[i].position().y();
+            cout << " ";
+            cout << vList[i].position().z();
+            cout << endl;
+        }
+    }*/
+
+    for (int i = 0; i < heightmapFile.size(); i++)
+    {
+        if (vList[i].position().z() < 0.f)
+        {
+            cout << vList[i].position().x();
+            cout << " ";
+            cout << vList[i].position().y();
+            cout << " ";
+            cout << vList[i].position().z();
+            cout << endl;
+        }
+    }
+
 
     Triangle triangle(10, 5, 2);
 

@@ -108,6 +108,7 @@ namespace FieldConverter
         }
 
 
+
     private:
         void load(const std::string& pathFile);
 
@@ -146,8 +147,8 @@ namespace FieldConverter
         {
             return m_grayscalePixelArray[columnIndex * rowIndex];
         }
+
     };
 }
-
 
 #endif //!HEIGHTMAP_H

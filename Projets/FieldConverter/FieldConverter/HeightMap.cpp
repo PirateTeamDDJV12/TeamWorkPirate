@@ -20,9 +20,14 @@ HeightMap::HeightMap(const std::string& pathFile) :
     load(pathFile);
 }
 
-HeightMap::HeightMap(const HeightMap& copy)
+HeightMap::HeightMap(const HeightMap& copy):
+    m_width{ DEFAULT_HEIGHTMAP_IMAGE_WIDTH },
+    m_height{ DEFAULT_HEIGHTMAP_IMAGE_HEIGHT },
+    m_grayscalePixelArray{ new uint8_t[DEFAULT_HEIGHTMAP_IMAGE_WIDTH * DEFAULT_HEIGHTMAP_IMAGE_HEIGHT] }
 {
-    std::copy(begin(), end(), m_grayscalePixelArray);
+    m_totalSize = m_width * m_height;
+
+    std::copy(copy.begin(), copy.end(), m_grayscalePixelArray);
 }
 
 HeightMap::HeightMap(HeightMap&& destructiveMovedSample) noexcept:
@@ -76,7 +81,7 @@ void HeightMap::load(const std::string& pathFile)
     reader.read(reinterpret_cast<char*>(m_grayscalePixelArray), size());
 }
 
-void HeightMap::swap(HeightMap& autre) noexcept// permutter les état de this avec ceux de autre
+void HeightMap::swap(HeightMap& autre) noexcept
 {
     using std::swap;
 
@@ -85,3 +90,4 @@ void HeightMap::swap(HeightMap& autre) noexcept// permutter les état de this ave
     swap(m_totalSize, autre.m_totalSize);
     swap(m_grayscalePixelArray, autre.m_grayscalePixelArray);
 }
+
