@@ -5,10 +5,17 @@ Created by Sun-lay gagneux
 
 #include "HeightMap.h"
 #include "VertexArray.h"
+/*
+#include "Triangle.h"
+#include "TriangleArray.h"
+*/
+#include "UnitaryTestTriangleArray.h"
 
 #include <iostream>
 
 #include <algorithm>
+
+
 
 
 
@@ -73,7 +80,7 @@ int main()
 
     Vertex vertexSample;
     */
-    
+    /*
     HeightMap heightmapFile("Ressources/TestHeightMap.raw");
 
    /* for (int i = 0; i < heightmapFile.size(); i++)
@@ -112,6 +119,21 @@ int main()
         }
     }
 
+
+    Triangle triangle(10, 5, 2);
+
+    cout << triangle.toString();
+    */
+
+    /*TriangleArray mapArray (5, 5);
+
+    //cout << mapArray.numberOfPolygone() << " " << mapArray.numberOfPolygoneInColumn() << " " << mapArray.numberOfPolygoneInRow() << " " << mapArray.numberOfTilesInColumn() << " " << mapArray.numberOfTilesInRow() << endl;
+
+    cout << mapArray.toString();*/
+
+    UnitaryTest::TriangleArrayUnitTest::run();
+
+    cout << UnitaryTest::TriangleArrayUnitTest::getResult();
 
   /*  LireFichierHeightmap();
     ConstruireTerrain(float echelleXY, float echelleZ);
