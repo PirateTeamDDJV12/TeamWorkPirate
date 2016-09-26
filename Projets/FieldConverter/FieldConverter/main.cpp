@@ -9,8 +9,7 @@ Created by Sun-lay gagneux
 #include <iostream>
 
 #include <algorithm>
-
-
+#include <map>
 
 
 using namespace FieldConverter;
@@ -25,7 +24,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     float result1 = vect1.scalarProduct(vect2);
     float result2 = vect2.scalarProduct(vect1);
 
-    if (result1 != result2)
+    if(result1 != result2)
     {
         throw 1;
     }
@@ -35,7 +34,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
 
     Vect3f vect3 = Vect3f::crossProduct(vect1, vect2);
 
-    if ((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
+    if((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
     {
         throw 2;
     }
@@ -60,7 +59,7 @@ int main()
     Vect3f vect1;
     Vect3f vect2(10, 5, 5);
 
-    
+
     run(vect1, vect2);
 
 
@@ -73,22 +72,24 @@ int main()
 
     Vertex vertexSample;
     */
-    
-    HeightMap heightmapFile("Ressources/TestHeightMap.raw");
 
-    for (int i = 0; i < heightmapFile.size(); i++)
+    HeightMap heightmapFile("Ressources/TestHeightMap.raw");
+    map<unsigned int, Vertex> myVertexMap = heightmapFile.transformToVertexMap();
+    
+    for(int i = 0; i < heightmapFile.size(); i++)
     {
-        cout << heightmapFile[i];
+        cout << i << " : " << myVertexMap[i].toString();
+        cout << endl;
     }
 
     cout << endl;
 
-  /*  LireFichierHeightmap();
-    ConstruireTerrain(float echelleXY, float echelleZ);
-    CalculerNormales();
-    ConstruireIndex();
-    EnregistrerTout();
-    */
+    /*  LireFichierHeightmap();
+      ConstruireTerrain(float echelleXY, float echelleZ);
+      CalculerNormales();
+      ConstruireIndex();
+      EnregistrerTout();
+      */
 
     system("pause");
 

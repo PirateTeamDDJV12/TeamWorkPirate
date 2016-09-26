@@ -8,6 +8,8 @@ Created by Sun-lay Gagneux
 #include <cstdint>
 #include <string>
 #include <memory.h>
+#include "Vertex.h"
+#include <map>
 
 
 namespace FieldConverter
@@ -107,6 +109,7 @@ namespace FieldConverter
             return m_height;
         }
 
+        std::map<unsigned int, Vertex> transformToVertexMap() const;
 
     private:
         void load(const std::string& pathFile);
