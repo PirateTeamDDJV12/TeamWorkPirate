@@ -17,7 +17,8 @@ namespace FieldConverter
     class HeightMap
     {
     public:
-        class ErrorLoadingHeightMap{};
+        class ErrorLoadingHeightMap
+        {};
 
 
     public:
@@ -36,7 +37,7 @@ namespace FieldConverter
         unsigned int m_totalSize;
 
         uint8_t* m_grayscalePixelArray;
-        
+
 
     public:
         /*
@@ -101,7 +102,7 @@ namespace FieldConverter
         }
 
         /*
-        get the height of the image (the height corresponds at the max row value of the 
+        get the height of the image (the height corresponds at the max row value of the
         picture) relatives to the upper left border of the image
         */
         unsigned int height() const noexcept
@@ -109,6 +110,10 @@ namespace FieldConverter
             return m_height;
         }
 
+        /*
+        Transform the actual Heightmap in a map with an index and a Vertex
+        We use this function to create all the Vertex of the Heightmap and their index
+         */
         std::map<unsigned int, Vertex> transformToVertexMap() const;
 
     private:
