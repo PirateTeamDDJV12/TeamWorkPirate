@@ -9,14 +9,14 @@ Created by Sun-lay Gagneux
 using namespace FieldConverter;
 
 
-HeightMap::HeightMap(const std::string& pathFile) : 
+HeightMap::HeightMap(const std::string& pathFile) :
     m_width{DEFAULT_HEIGHTMAP_IMAGE_WIDTH},
     m_height{DEFAULT_HEIGHTMAP_IMAGE_HEIGHT}
 {
     m_totalSize = m_width * m_height;
 
     m_grayscalePixelArray = new uint8_t[m_totalSize];
-    
+
     load(pathFile);
 }
 
@@ -31,17 +31,17 @@ HeightMap::HeightMap(const HeightMap& copy):
 }
 
 HeightMap::HeightMap(HeightMap&& destructiveMovedSample) noexcept:
-    m_height{destructiveMovedSample.height()},
-    m_width{destructiveMovedSample.width()},
-    m_totalSize{destructiveMovedSample.size()},
-    m_grayscalePixelArray{destructiveMovedSample.m_grayscalePixelArray}
+m_height{destructiveMovedSample.height()},
+m_width{destructiveMovedSample.width()},
+m_totalSize{destructiveMovedSample.size()},
+m_grayscalePixelArray{destructiveMovedSample.m_grayscalePixelArray}
 {
     destructiveMovedSample.m_grayscalePixelArray = nullptr;
 }
 
 HeightMap& HeightMap::operator=(const HeightMap& other)
 {
-    (HeightMap{ other }).swap(*this);
+    (HeightMap{other}).swap(*this);
 
     return *this;
 }
@@ -53,25 +53,43 @@ HeightMap& HeightMap::operator=(HeightMap&& destructiveMovedSample)
     return *this;
 }
 
+std::map<unsigned, Vertex> HeightMap::transformToVertexMap() const
+{
+    std::map<unsigned int, Vertex> myVertexMap;
+    float row = 0;
+    for(int i = 0; i < size(); i++)
+    {
+        if(i != 0 && i % m_width == 0)
+        {
+            row++;
+        }
+        float col = i - (m_width * row);
+        float zPos = static_cast<float>(this->at(i));
+
+        myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(row, col, zPos, 0.0f, 0.0f, 0.0f)));
+    }
+    return myVertexMap;
+}
+
 void HeightMap::load(const std::string& pathFile)
 {
     using std::ifstream;
     using std::istreambuf_iterator;
     using std::ios;
     using std::copy;
-    
+
     ifstream reader(pathFile, ios::binary);
 
-    if (reader.bad() || reader.eof())
+    if(reader.bad() || reader.eof())
     {
         throw ErrorLoadingHeightMap{};
     }
 
-    size_t iter = 0;
+    //size_t iter = 0;
 
     /*std::for_each(
-        begin(), 
-        end(), 
+        begin(),
+        end(),
         [&](unsigned int) {
             reader. >> m_grayscalePixelArray[iter];
             iter++;
