@@ -1,7 +1,6 @@
 #ifndef VERTEXARRAY_H
 #define VERTEXARRAY_H
 
-#include <vector>
 #include <map>
 
 namespace FieldConverter
