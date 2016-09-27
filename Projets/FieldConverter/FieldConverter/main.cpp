@@ -66,15 +66,21 @@ int main()
     std::vector<Vertex> vList = vArray.getArray();
     TriangleArray mapArray (257, 257);
 
-
     heightmapFile.writeIntoOutputFile("testOutput.txt", heightmapFile.transformToVertexMap(), mapArray);
 
-	std::cout << Config::getInstance().getPath() << std::endl;
-	std::cout << Config::getInstance().getWidth() << std::endl;
-	std::cout << Config::getInstance().getHeight() << std::endl;
-	std::cout << Config::getInstance().getScale() << std::endl;
+    /*  LireFichierHeightmap();
+    ConstruireTerrain(float echelleXY, float echelleZ);
+    CalculerNormales();
+    ConstruireIndex();
+    EnregistrerTout();
+    */
 
-	system("pause");
+    std::cout << Config::getInstance().getPath() << std::endl;
+    std::cout << Config::getInstance().getWidth() << std::endl;
+    std::cout << Config::getInstance().getHeight() << std::endl;
+    std::cout << Config::getInstance().getScale() << std::endl;
+
+    system("pause");
 
 	return 0;
 }
