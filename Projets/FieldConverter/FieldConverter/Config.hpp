@@ -12,42 +12,42 @@ namespace FieldConverter
 {
 
 
-	class Config
-	{
-	public:
-		class BadConfigFile : public std::runtime_error
-		{
-		public:
-			BadConfigFile() = delete;
-			BadConfigFile(const std::string &error) : std::runtime_error(error) {}
-		};
+    class Config
+    {
+    public:
+        class BadConfigFile : public std::runtime_error
+        {
+        public:
+            BadConfigFile() = delete;
+            BadConfigFile(const std::string &error) : std::runtime_error(error) {}
+        };
 
-	private:
+    private:
 
-		unsigned int					m_width;
-		unsigned int					m_height;
-		float							m_scale;
-		std::string						m_path;
-		static std::unique_ptr<Config>	m_instance;
+        unsigned int                    m_width;
+        unsigned int                    m_height;
+        float                           m_scale;
+        std::string                     m_path;
+        static std::unique_ptr<Config>  m_instance;
 
-		Config();
+        Config();
 
-	public:
-		Config(const Config &other) = delete;
-		Config &operator=(const Config& other) = delete;
+    public:
+        Config(const Config &other) = delete;
+        Config &operator=(const Config& other) = delete;
 
 
-		static Config	&getInstance();
-		void			initialize();
+        static Config   &getInstance();
+        void            initialize();
 
-		int				getWidth() const;
-		int				getHeight() const;
-		float			getScale() const;
-		std::string		getPath() const;
+        int             getWidth() const;
+        int             getHeight() const;
+        float           getScale() const;
+        std::string     getPath() const;
 
-		~Config();
+        ~Config();
 
-	};
+    };
 }
 
 #endif
