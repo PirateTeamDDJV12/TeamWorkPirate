@@ -4,7 +4,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <exception>
+#include <stdexcept>
 #include <iostream>
 #include <memory>
 
