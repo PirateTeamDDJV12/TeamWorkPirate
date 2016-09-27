@@ -16,8 +16,11 @@ namespace FieldConverter
 	class Config
 	{
 	public:
-		class BadConfigFile : public std::exception 
+		class BadConfigFile : public std::runtime_error
 		{
+		public:
+			BadConfigFile() = delete;
+			BadConfigFile(const std::string &error) : std::runtime_error(error) {}
 		};
 
 	private:
@@ -32,8 +35,10 @@ namespace FieldConverter
 
 	public:
 		Config(const Config &other) = delete;
+		Config &operator=(const Config& other) = delete;
 
-		static Config&	getInstance();
+		static Config	&getInstance();
+		void			initialize();
 
 		int				getWidth() const;
 		int				getHeight() const;
@@ -42,7 +47,6 @@ namespace FieldConverter
 
 		~Config();
 
-		Config &operator=(const Config& other) = delete;
 	};
 }
 
