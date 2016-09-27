@@ -10,9 +10,9 @@ Created by Sun-lay gagneux
 #include "TriangleArray.h"
 */
 #include "UnitaryTestTriangleArray.h"
-
+#include "Config.hpp"
 #include <iostream>
-
+#include <stdexcept>
 #include <algorithm>
 #include <map>
 
@@ -58,7 +58,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     vect3 = vect3 / 5.f;
     cout << "Reducing /5 : vect3(" << vect3.x() << " " << vect3.y() << " " << vect3.z() << ")" << endl;
 }
-
+using FieldConverter::Config;
 
 int main()
 {
@@ -150,8 +150,20 @@ int main()
     ConstruireIndex();
     EnregistrerTout();
     */
+	try
+	{
+		throw std::runtime_error("lol");
+	}
+	catch (const std::exception  &e)
+	{
+	}
 
-    system("pause");
+	std::cout << Config::getInstance().getPath() << std::endl;
+	std::cout << Config::getInstance().getWidth() << std::endl;
+	std::cout << Config::getInstance().getHeight() << std::endl;
+	std::cout << Config::getInstance().getScale() << std::endl;
+>>>>>>> Stashed changes
+
 
     return 0;
 }
