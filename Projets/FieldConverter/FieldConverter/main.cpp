@@ -64,7 +64,7 @@ int main()
     HeightMap heightmapFile("Ressources/TestHeightMap.raw");
     VertexArray vArray = VertexArray(heightmapFile, 0.3f);
     std::vector<Vertex> vList = vArray.getArray();
-    TriangleArray mapArray (257, 257);
+    TriangleArray mapArray(257, 257);
 
     heightmapFile.writeIntoOutputFile("testOutput.txt", heightmapFile.transformToVertexMap(), mapArray);
 
@@ -75,7 +75,7 @@ int main()
     EnregistrerTout();
     */
 
-    try 
+    try
     {
         std::cout << Config::getInstance().getPath() << std::endl;
         std::cout << Config::getInstance().getWidth() << std::endl;
@@ -89,5 +89,5 @@ int main()
     }
     system("pause");
 
-	return 0;
+    return 0;
 }
