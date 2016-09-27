@@ -6,15 +6,12 @@ Created by Sun-lay gagneux
 //#include "UnitaryTestTriangleArray.h"
 #include "VertexArray.h"
 #include "TriangleArray.h"
+#include "Config.hpp"
 #include "HeightMap.h"
 #include <iostream>
 
-
-
-
 using namespace FieldConverter;
 using namespace std;
-
 
 void run(const Vect3f& vect1, const Vect3f& vect2)
 {
@@ -24,7 +21,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     float result1 = vect1.scalarProduct(vect2);
     float result2 = vect2.scalarProduct(vect1);
 
-    if(result1 != result2)
+    if (result1 != result2)
     {
         throw 1;
     }
@@ -34,7 +31,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
 
     Vect3f vect3 = Vect3f::crossProduct(vect1, vect2);
 
-    if((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
+    if ((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
     {
         throw 2;
     }
@@ -71,6 +68,7 @@ void runTest(TriangleArray mapArray)
     //cout << UnitaryTest::TriangleArrayUnitTest::getResult();
 }
 
+using FieldConverter::Config;
 int main()
 {
     // Read the file and create an char array with the file informations
@@ -85,10 +83,20 @@ int main()
     // Write the vertex array and the triangle array in a file
     heightmapFile.writeIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
 
-
     //runTest(mapArray);
 
-
+    try
+    {
+        std::cout << Config::getInstance().getPath() << std::endl;
+        std::cout << Config::getInstance().getWidth() << std::endl;
+        std::cout << Config::getInstance().getHeight() << std::endl;
+        std::cout << Config::getInstance().getScale() << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+        return 1;
+    }
     system("pause");
 
     return 0;
