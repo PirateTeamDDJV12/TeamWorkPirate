@@ -1,3 +1,6 @@
+#include <fstream>
+#include <sstream>
+
 #include "Config.hpp"
 
 using FieldConverter::Config;
@@ -11,7 +14,7 @@ Config::Config() : m_width{ 0 }, m_height{ 0 }, m_scale{ 0.0f }, m_path{}
 
 void Config::initialize()
 {
-    std::ifstream configFile("Ressources/heightmap.conf");
+    std::ifstream configFile("Ressources/heightmap.onf");
     std::string type;
     std::string value;
     std::stringstream ss;
@@ -84,5 +87,4 @@ std::string Config::getPath() const
 
 Config::~Config()
 {
-    std::cout << "Bruuuuuuuuuuh" << std::endl;
 }

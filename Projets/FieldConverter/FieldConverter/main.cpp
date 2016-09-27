@@ -75,11 +75,18 @@ int main()
     EnregistrerTout();
     */
 
-    std::cout << Config::getInstance().getPath() << std::endl;
-    std::cout << Config::getInstance().getWidth() << std::endl;
-    std::cout << Config::getInstance().getHeight() << std::endl;
-    std::cout << Config::getInstance().getScale() << std::endl;
-
+    try 
+    {
+        std::cout << Config::getInstance().getPath() << std::endl;
+        std::cout << Config::getInstance().getWidth() << std::endl;
+        std::cout << Config::getInstance().getHeight() << std::endl;
+        std::cout << Config::getInstance().getScale() << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+        return 1;
+    }
     system("pause");
 
 	return 0;

@@ -2,10 +2,7 @@
 #define _CONFIG_H_
 
 #include <string>
-#include <fstream>
-#include <sstream>
 #include <stdexcept>
-#include <iostream>
 #include <memory>
 
 namespace FieldConverter
