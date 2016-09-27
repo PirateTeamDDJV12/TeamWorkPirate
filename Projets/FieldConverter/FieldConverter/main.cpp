@@ -10,9 +10,8 @@ Created by Sun-lay gagneux
 #include "TriangleArray.h"
 */
 #include "UnitaryTestTriangleArray.h"
-
+#include "Config.hpp"
 #include <iostream>
-
 #include <algorithm>
 #include <map>
 
@@ -31,7 +30,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     float result1 = vect1.scalarProduct(vect2);
     float result2 = vect2.scalarProduct(vect1);
 
-    if(result1 != result2)
+    if (result1 != result2)
     {
         throw 1;
     }
@@ -41,7 +40,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
 
     Vect3f vect3 = Vect3f::crossProduct(vect1, vect2);
 
-    if((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
+    if ((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
     {
         throw 2;
     }
@@ -58,102 +57,36 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     vect3 = vect3 / 5.f;
     cout << "Reducing /5 : vect3(" << vect3.x() << " " << vect3.y() << " " << vect3.z() << ")" << endl;
 }
-
+using FieldConverter::Config;
 
 int main()
 {
-    /*
-    Vect3f vect1;
-    Vect3f vect2(10, 5, 5);
-
-
-    run(vect1, vect2);
-
-
-    vect1.x(-15);
-    vect1.y(5);
-    vect1.z(-15);
-
-    run(vect1, vect2);
-
-
-    Vertex vertexSample;
-    */
-    
     HeightMap heightmapFile("Ressources/TestHeightMap.raw");
-/*
-   /* for (int i = 0; i < heightmapFile.size(); i++)
-    HeightMap heightmapFile("Ressources/TestHeightMap.raw");
-    map<unsigned int, Vertex> myVertexMap = heightmapFile.transformToVertexMap();
-    
-    for(int i = 0; i < heightmapFile.size(); i++)
-    {
-        cout << i << " : " << myVertexMap[i].toString();
-        cout << endl;
-    }
-
-    cout << endl;*/
-
-    /* convertir en VertexArray*/
-    /*VertexArray vArray = VertexArray(heightmapFile, 0.3f);
-    std::vector<Vertex> vList = vArray.getArray();*/
-   /* for (int i = 0;i < heightmapFile.size();i++)
-    {
-        //if (i % 3 == 2)
-        {
-            cout << vList[i].position().x();
-            cout << " ";
-            cout << vList[i].position().y();
-            cout << " ";
-            cout << vList[i].position().z();
-            cout << endl;
-        }
-    }*/
-    /*
-    for (int i = 0; i < heightmapFile.size(); i++)
-    {
-        if (vList[i].position().z() < 0.f)
-        {
-            cout << vList[i].position().x();
-            cout << " ";
-            cout << vList[i].position().y();
-            cout << " ";
-            cout << vList[i].position().z();
-            cout << endl;
-        }
-    }*/
-
-
-    /*  LireFichierHeightmap();
-      ConstruireTerrain(float echelleXY, float echelleZ);
-      CalculerNormales();
-      ConstruireIndex();
-      EnregistrerTout();
-      */
-    /*Triangle triangle(10, 5, 2);
-
-    cout << triangle.toString();*/
-
-    TriangleArray mapArray (257, 257);
-
+    VertexArray vArray = VertexArray(heightmapFile, 0.3f);
+    std::vector<Vertex> vList = vArray.getArray();
+    TriangleArray mapArray(257, 257);
 
     heightmapFile.writeIntoOutputFile("testOutput.txt", heightmapFile.transformToVertexMap(), mapArray);
 
-    //cout << mapArray.numberOfPolygone() << " " << mapArray.numberOfPolygoneInColumn() << " " << mapArray.numberOfPolygoneInRow() << " " << mapArray.numberOfTilesInColumn() << " " << mapArray.numberOfTilesInRow() << endl;
-
-    //cout << mapArray.toString();*/
-    /*
-    UnitaryTest::TriangleArrayUnitTest::run();
-
-    cout << UnitaryTest::TriangleArrayUnitTest::getResult();
-*/
-  /*  LireFichierHeightmap();
+    /*  LireFichierHeightmap();
     ConstruireTerrain(float echelleXY, float echelleZ);
     CalculerNormales();
     ConstruireIndex();
     EnregistrerTout();
     */
 
+    try
+    {
+        std::cout << Config::getInstance().getPath() << std::endl;
+        std::cout << Config::getInstance().getWidth() << std::endl;
+        std::cout << Config::getInstance().getHeight() << std::endl;
+        std::cout << Config::getInstance().getScale() << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+        return 1;
+    }
     system("pause");
 
     return 0;

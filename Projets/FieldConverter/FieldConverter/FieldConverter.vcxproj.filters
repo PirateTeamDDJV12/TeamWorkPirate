@@ -25,6 +25,9 @@
     <ClCompile Include="VertexArray.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeightMap.h">
@@ -48,13 +51,18 @@
     <ClInclude Include="UnitaryTestTriangleArray.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Config.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
-      <UniqueIdentifier>{0bc1dc4c-bcda-4b1d-997d-d31c002c9e66}</UniqueIdentifier>
+      <UniqueIdentifier>{92757c57-da27-47e9-a1fd-3d02519ec61d}</UniqueIdentifier>
+	  <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="Sources">
-      <UniqueIdentifier>{9ce94038-da38-49bc-af75-436fc1c5c9f3}</UniqueIdentifier>
+      <UniqueIdentifier>{5e48996a-f9b3-4093-8683-e41eb5de779c}</UniqueIdentifier>
+	  <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
 </Project>
