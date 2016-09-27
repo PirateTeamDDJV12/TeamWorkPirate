@@ -25,7 +25,7 @@ std::map<unsigned, Vertex> VertexArray::transformToVertexMap() const
 {
     std::map<unsigned int, Vertex> myVertexMap;
     float row = 0;
-    for(int i = 0; i < m_heightMap.size(); i++)
+    for(unsigned int i = 0; i < m_heightMap.size(); i++)
     {
         if(i != 0 && i % m_heightMap.width() == 0)
         {
@@ -41,7 +41,7 @@ std::map<unsigned, Vertex> VertexArray::transformToVertexMap() const
 
 void VertexArray::scaleVertexMap()
 {
-    for(int i = 0; i < m_nbVertices; i++)
+    for(unsigned int i = 0; i < m_nbVertices; i++)
     {
         m_vertexMap[i].position().z(m_vertexMap[i].position().z() * m_scale);
     }
@@ -52,7 +52,7 @@ void VertexArray::offsetVertexMap()
     /*Looking for smallest z*/
     float min = m_vertexMap[0].position().z();
 
-    for(int i = 1; i < m_nbVertices; i++)
+    for(unsigned int i = 1; i < m_nbVertices; i++)
     {
         if(m_vertexMap[i].position().z() < min)
         {
@@ -60,7 +60,7 @@ void VertexArray::offsetVertexMap()
         }
     }
     /*substract min to each z*/
-    for(int i = 0; i < m_nbVertices; i++)
+    for(unsigned int i = 0; i < m_nbVertices; i++)
     {
         m_vertexMap[i].position().z(m_vertexMap[i].position().z() - min);
     }
