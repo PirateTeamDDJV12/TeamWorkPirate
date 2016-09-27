@@ -5,51 +5,70 @@
 using namespace FieldConverter;
 
 
-VertexArray::VertexArray(const HeightMap& heightmap, float scale) : m_scale{ scale }, m_heightMap{ heightmap }, m_nbVertices{ heightmap.size() }
+VertexArray::VertexArray(const HeightMap& heightmap, float scale)
+    :
+    m_heightMap{heightmap},
+    m_scale{scale},
+    m_nbVertices{heightmap.size()}
 {
-    for (int i = 0; i < m_nbVertices; i++)
-    {   //on récupère la position des points
-        Vect3f pos = Vect3f(i%HeightMap::DEFAULT_HEIGHTMAP_IMAGE_WIDTH,
-            div(i, HeightMap::DEFAULT_HEIGHTMAP_IMAGE_HEIGHT).quot, 
-            heightmap.at(i));
-        // On calcule la normale de chaque point (pas fait, pour l'instant 0,0,1)
-        
-        m_vertices.push_back(Vertex(pos.x(),pos.y(),pos.z(),0,0,1));
-    }
-    VertexArray::offset();
-    VertexArray::scale();
+    // Transform the heightmap into a map with index and Vertex
+    m_vertexMap = transformToVertexMap();
+
+    // Change all the vertex to remove an useless offset
+    offsetVertexMap();
+
+    // Scale all the vertex's zPos to not have 0 to 255 height
+    scaleVertexMap();
 }
 
-void VertexArray::scale()
+std::map<unsigned, Vertex> VertexArray::transformToVertexMap() const
 {
-    for (int i = 0; i < m_nbVertices; i++)
-    {   
-        m_vertices[i].position().z(m_vertices[i].position().z() * m_scale);
+    std::map<unsigned int, Vertex> myVertexMap;
+    float row = 0;
+    for(int i = 0; i < m_heightMap.size(); i++)
+    {
+        if(i != 0 && i % m_heightMap.width() == 0)
+        {
+            row++;
+        }
+        float col = i - (m_heightMap.width() * row);
+        float zPos = static_cast<float>(m_heightMap.at(i));
+
+        myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(row, col, zPos, 0.0f, 0.0f, 0.0f)));
+    }
+    return myVertexMap;
+}
+
+void VertexArray::scaleVertexMap()
+{
+    for(int i = 0; i < m_nbVertices; i++)
+    {
+        m_vertexMap[i].position().z(m_vertexMap[i].position().z() * m_scale);
     }
 }
 
-void VertexArray::offset()
+void VertexArray::offsetVertexMap()
 {
     /*Looking for smallest z*/
-    float min = m_vertices[0].position().z();
+    float min = m_vertexMap[0].position().z();
 
-    for (int i = 1; i < m_nbVertices; i++)
+    for(int i = 1; i < m_nbVertices; i++)
     {
-        if (m_vertices[i].position().z() < min)
+        if(m_vertexMap[i].position().z() < min)
         {
-            min = m_vertices[i].position().z();
+            min = m_vertexMap[i].position().z();
         }
     }
     /*substract min to each z*/
-    for (int i = 0; i < m_nbVertices; i++)
+    for(int i = 0; i < m_nbVertices; i++)
     {
-        m_vertices[i].position().z(m_vertices[i].position().z() - min);
+        m_vertexMap[i].position().z(m_vertexMap[i].position().z() - min);
     }
 }
 
-std::vector<Vertex> VertexArray::getArray() const noexcept
+std::map<unsigned, Vertex> VertexArray::getVertexMap() const noexcept
 {
-    return m_vertices;
+    return m_vertexMap;
 }
 
 void VertexArray::computeNormal(const TriangleArray& mapping) noexcept

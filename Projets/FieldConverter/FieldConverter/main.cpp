@@ -1,20 +1,13 @@
 /*
 Created by Sun-lay gagneux
 */
-#include "Vertex.h"
-
-#include "HeightMap.h"
+//#include "Vertex.h"
+//#include "Triangle.h"
+//#include "UnitaryTestTriangleArray.h"
 #include "VertexArray.h"
-/*
-#include "Triangle.h"
 #include "TriangleArray.h"
-*/
-#include "UnitaryTestTriangleArray.h"
-
+#include "HeightMap.h"
 #include <iostream>
-
-#include <algorithm>
-#include <map>
 
 
 
@@ -59,100 +52,42 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     cout << "Reducing /5 : vect3(" << vect3.x() << " " << vect3.y() << " " << vect3.z() << ")" << endl;
 }
 
-
-int main()
+void runTest(TriangleArray mapArray)
 {
-    /*
     Vect3f vect1;
     Vect3f vect2(10, 5, 5);
-
-
     run(vect1, vect2);
-
-
     vect1.x(-15);
     vect1.y(5);
     vect1.z(-15);
-
     run(vect1, vect2);
-
-
     Vertex vertexSample;
-    */
-    
+
+    cout << mapArray.numberOfPolygone() << " " << mapArray.numberOfPolygoneInColumn() << " " << mapArray.numberOfPolygoneInRow() << " " << mapArray.numberOfTilesInColumn() << " " << mapArray.numberOfTilesInRow() << endl;
+
+    cout << mapArray.toString();
+
+    //UnitaryTest::TriangleArrayUnitTest::run();
+    //cout << UnitaryTest::TriangleArrayUnitTest::getResult();
+}
+
+int main()
+{
+    // Read the file and create an char array with the file informations
     HeightMap heightmapFile("Ressources/TestHeightMap.raw");
-/*
-   /* for (int i = 0; i < heightmapFile.size(); i++)
-    HeightMap heightmapFile("Ressources/TestHeightMap.raw");
-    map<unsigned int, Vertex> myVertexMap = heightmapFile.transformToVertexMap();
-    
-    for(int i = 0; i < heightmapFile.size(); i++)
-    {
-        cout << i << " : " << myVertexMap[i].toString();
-        cout << endl;
-    }
 
-    cout << endl;*/
+    // Create a vertex array (a map) from the heightmap and apply the offset and scale function
+    VertexArray vArray = VertexArray(heightmapFile, 0.3f);
 
-    /* convertir en VertexArray*/
-    /*VertexArray vArray = VertexArray(heightmapFile, 0.3f);
-    std::vector<Vertex> vList = vArray.getArray();*/
-   /* for (int i = 0;i < heightmapFile.size();i++)
-    {
-        //if (i % 3 == 2)
-        {
-            cout << vList[i].position().x();
-            cout << " ";
-            cout << vList[i].position().y();
-            cout << " ";
-            cout << vList[i].position().z();
-            cout << endl;
-        }
-    }*/
-    /*
-    for (int i = 0; i < heightmapFile.size(); i++)
-    {
-        if (vList[i].position().z() < 0.f)
-        {
-            cout << vList[i].position().x();
-            cout << " ";
-            cout << vList[i].position().y();
-            cout << " ";
-            cout << vList[i].position().z();
-            cout << endl;
-        }
-    }*/
+    // Create an triangle array
+    TriangleArray mapArray(257, 257);
+
+    // Write the vertex array and the triangle array in a file
+    heightmapFile.writeIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
 
 
-    /*  LireFichierHeightmap();
-      ConstruireTerrain(float echelleXY, float echelleZ);
-      CalculerNormales();
-      ConstruireIndex();
-      EnregistrerTout();
-      */
-    /*Triangle triangle(10, 5, 2);
+    //runTest(mapArray);
 
-    cout << triangle.toString();*/
-
-    TriangleArray mapArray (257, 257);
-
-
-    heightmapFile.writeIntoOutputFile("testOutput.txt", heightmapFile.transformToVertexMap(), mapArray);
-
-    //cout << mapArray.numberOfPolygone() << " " << mapArray.numberOfPolygoneInColumn() << " " << mapArray.numberOfPolygoneInRow() << " " << mapArray.numberOfTilesInColumn() << " " << mapArray.numberOfTilesInRow() << endl;
-
-    //cout << mapArray.toString();*/
-    /*
-    UnitaryTest::TriangleArrayUnitTest::run();
-
-    cout << UnitaryTest::TriangleArrayUnitTest::getResult();
-*/
-  /*  LireFichierHeightmap();
-    ConstruireTerrain(float echelleXY, float echelleZ);
-    CalculerNormales();
-    ConstruireIndex();
-    EnregistrerTout();
-    */
 
     system("pause");
 

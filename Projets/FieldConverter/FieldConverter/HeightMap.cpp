@@ -56,24 +56,6 @@ HeightMap& HeightMap::operator=(HeightMap&& destructiveMovedSample)
     return *this;
 }
 
-std::map<unsigned, Vertex> HeightMap::transformToVertexMap() const
-{
-    std::map<unsigned int, Vertex> myVertexMap;
-    float row = 0;
-    for(int i = 0; i < size(); i++)
-    {
-        if(i != 0 && i % m_width == 0)
-        {
-            row++;
-        }
-        float col = i - (m_width * row);
-        float zPos = static_cast<float>(this->at(i));
-
-        myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(row, col, zPos, 0.0f, 0.0f, 0.0f)));
-    }
-    return myVertexMap;
-}
-
 void HeightMap::load(const std::string& pathFile)
 {
     using std::ifstream;

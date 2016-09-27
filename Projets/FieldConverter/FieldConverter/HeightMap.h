@@ -111,13 +111,7 @@ namespace FieldConverter
         {
             return m_height;
         }
-
-        /*
-        Transform the actual Heightmap in a map with an index and a Vertex
-        We use this function to create all the Vertex of the Heightmap and their index
-         */
-        std::map<unsigned int, Vertex> transformToVertexMap() const;
-
+        
         /*
         Writes output file named fileName (include the path). Writes into this file the 
         vertex map and the triangle arry separated by a jump line
