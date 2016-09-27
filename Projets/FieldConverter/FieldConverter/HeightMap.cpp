@@ -6,7 +6,7 @@ Created by Sun-lay Gagneux
 #include "TriangleArray.h"
 
 #include <algorithm>
-#include <numeric>
+//#include <numeric>
 #include <fstream>
 
 using namespace FieldConverter;
