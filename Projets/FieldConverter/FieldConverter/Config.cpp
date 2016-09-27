@@ -4,8 +4,19 @@ using FieldConverter::Config;
 
 Config Config::m_instance;
 
+Config::Config() : m_width{ 0 }, m_height{ 0 }, m_scale{ 0.0f }, m_path{}
+{
+	try
+	{
+		initialize();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
 
-Config::Config() try : m_width { 0 }, m_height { 0 }, m_scale { 0.0f }, m_path { }
+void Config::initialize()
 {
 	std::ifstream configFile("Ressources/heightmap.conf");
 	std::string type;
@@ -14,7 +25,9 @@ Config::Config() try : m_width { 0 }, m_height { 0 }, m_scale { 0.0f }, m_path {
 
 
 	if (configFile.bad() || configFile.fail())
-		throw BadConfigFile();
+	{
+		throw BadConfigFile("ERROR : Wrong config file path");
+	}
 	while (std::getline(configFile, type, '='))
 	{
 		std::getline(configFile, value);
@@ -40,15 +53,10 @@ Config::Config() try : m_width { 0 }, m_height { 0 }, m_scale { 0.0f }, m_path {
 		ss.str(std::string());
 		ss.clear();
 	}
-
 	if (m_width != m_height || m_width == 0 || m_path.empty())
 	{
-		throw BadConfigFile();
+		throw BadConfigFile("ERROR : Wrong config file content");
 	}
-}
-catch (std::exception *e)
-{
-	std::cout << "Please send a valid file" << std::endl;
 }
 
 Config &Config::getInstance()
