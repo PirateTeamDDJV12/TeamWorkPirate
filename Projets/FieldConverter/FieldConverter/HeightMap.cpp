@@ -3,7 +3,10 @@ Created by Sun-lay Gagneux
 */
 #include "HeightMap.h"
 
+#include "TriangleArray.h"
+
 #include <algorithm>
+//#include <numeric>
 #include <fstream>
 
 using namespace FieldConverter;
@@ -109,3 +112,30 @@ void HeightMap::swap(HeightMap& autre) noexcept
     swap(m_grayscalePixelArray, autre.m_grayscalePixelArray);
 }
 
+void HeightMap::writeIntoOutputFile(const std::string& fileName, const std::map<unsigned int, Vertex>& vertexMap, const TriangleArray& triangleArray) const noexcept
+{
+    // Execution time : 40s ... But, TP06... Ouch !  :p
+    /*std::string toWrite(std::accumulate(
+                            vertexMap.begin(),
+                            vertexMap.end(),
+                            std::string(""),
+                            [](const std::string& accumulated, const std::pair<unsigned int, Vertex>& indexedVertex) {
+                                return (accumulated + std::to_string(indexedVertex.first) + " " + indexedVertex.second.toString());
+                            }
+                        )
+    );
+    */
+    
+    //Execution time : 15s ...  
+    std::string toWrite("");
+    std::for_each(vertexMap.begin(),
+                  vertexMap.end(),
+                  [&toWrite](const std::pair<unsigned int, Vertex>& indexedVertex) {
+                      toWrite += std::to_string(indexedVertex.first) + " " + indexedVertex.second.toString();
+                  }
+    );
+
+    toWrite += ("\n" + triangleArray.toString());
+
+    std::ofstream{ fileName }.write(toWrite.c_str(), toWrite.size());
+}

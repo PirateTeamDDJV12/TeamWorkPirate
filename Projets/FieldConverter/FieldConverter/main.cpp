@@ -79,9 +79,9 @@ int main()
 
     Vertex vertexSample;
     */
-    /*
+    
     HeightMap heightmapFile("Ressources/TestHeightMap.raw");
-
+/*
    /* for (int i = 0; i < heightmapFile.size(); i++)
     HeightMap heightmapFile("Ressources/TestHeightMap.raw");
     map<unsigned int, Vertex> myVertexMap = heightmapFile.transformToVertexMap();
@@ -95,8 +95,8 @@ int main()
     cout << endl;*/
 
     /* convertir en VertexArray*/
-    VertexArray vArray = VertexArray(heightmapFile, 0.3f);
-    std::vector<Vertex> vList = vArray.getArray();
+    /*VertexArray vArray = VertexArray(heightmapFile, 0.3f);
+    std::vector<Vertex> vList = vArray.getArray();*/
    /* for (int i = 0;i < heightmapFile.size();i++)
     {
         //if (i % 3 == 2)
@@ -109,7 +109,7 @@ int main()
             cout << endl;
         }
     }*/
-
+    /*
     for (int i = 0; i < heightmapFile.size(); i++)
     {
         if (vList[i].position().z() < 0.f)
@@ -121,7 +121,7 @@ int main()
             cout << vList[i].position().z();
             cout << endl;
         }
-    }
+    }*/
 
 
     /*  LireFichierHeightmap();
@@ -130,20 +130,23 @@ int main()
       ConstruireIndex();
       EnregistrerTout();
       */
-    Triangle triangle(10, 5, 2);
+    /*Triangle triangle(10, 5, 2);
 
-    cout << triangle.toString();
+    cout << triangle.toString();*/
 
-    /*TriangleArray mapArray (5, 5);
+    TriangleArray mapArray (257, 257);
+
+
+    heightmapFile.writeIntoOutputFile("testOutput.txt", heightmapFile.transformToVertexMap(), mapArray);
 
     //cout << mapArray.numberOfPolygone() << " " << mapArray.numberOfPolygoneInColumn() << " " << mapArray.numberOfPolygoneInRow() << " " << mapArray.numberOfTilesInColumn() << " " << mapArray.numberOfTilesInRow() << endl;
 
-    cout << mapArray.toString();*/
-
+    //cout << mapArray.toString();*/
+    /*
     UnitaryTest::TriangleArrayUnitTest::run();
 
     cout << UnitaryTest::TriangleArrayUnitTest::getResult();
-
+*/
   /*  LireFichierHeightmap();
     ConstruireTerrain(float echelleXY, float echelleZ);
     CalculerNormales();

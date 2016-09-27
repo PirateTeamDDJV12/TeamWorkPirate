@@ -14,6 +14,8 @@ Created by Sun-lay Gagneux
 
 namespace FieldConverter
 {
+    class TriangleArray;
+
     class HeightMap
     {
     public:
@@ -115,6 +117,14 @@ namespace FieldConverter
         We use this function to create all the Vertex of the Heightmap and their index
          */
         std::map<unsigned int, Vertex> transformToVertexMap() const;
+
+        /*
+        Writes output file named fileName (include the path). Writes into this file the 
+        vertex map and the triangle arry separated by a jump line
+        */
+        void writeIntoOutputFile(const std::string& fileName, 
+                                 const std::map<unsigned int, Vertex>& vertexMap, 
+                                 const TriangleArray& triangleArray) const noexcept;
 
 
     private:
