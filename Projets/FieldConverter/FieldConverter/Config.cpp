@@ -2,18 +2,11 @@
 
 using FieldConverter::Config;
 
-Config Config::m_instance;
+std::unique_ptr<Config> Config::m_instance = nullptr;
 
 Config::Config() : m_width{ 0 }, m_height{ 0 }, m_scale{ 0.0f }, m_path{}
 {
-	try
-	{
-		initialize();
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	initialize();
 }
 
 void Config::initialize()
@@ -61,7 +54,12 @@ void Config::initialize()
 
 Config &Config::getInstance()
 {
-	return m_instance;
+	if (m_instance == nullptr)
+	{
+		m_instance.reset(new Config);
+	}
+
+	return *m_instance;
 }
 
 int Config::getWidth() const
@@ -86,4 +84,5 @@ std::string Config::getPath() const
 
 Config::~Config()
 {
+	std::cout << "Bruuuuuuuuuuh" << std::endl;
 }
