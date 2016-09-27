@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
@@ -8,6 +6,7 @@
 #include <sstream>
 #include <exception>
 #include <iostream>
+#include <memory>
 
 namespace FieldConverter
 {
@@ -25,17 +24,18 @@ namespace FieldConverter
 
 	private:
 
-		unsigned int	m_width;
-		unsigned int	m_height;
-		float			m_scale;
-		std::string		m_path;
-		static Config	m_instance;
+		unsigned int					m_width;
+		unsigned int					m_height;
+		float							m_scale;
+		std::string						m_path;
+		static std::unique_ptr<Config>	m_instance;
 
 		Config();
 
 	public:
 		Config(const Config &other) = delete;
 		Config &operator=(const Config& other) = delete;
+
 
 		static Config	&getInstance();
 		void			initialize();
