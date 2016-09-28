@@ -1,10 +1,13 @@
 #ifndef VERTEXARRAY_H
 #define VERTEXARRAY_H
 
+#include "Vect3f.h"
+
 #include <map>
 
 namespace FieldConverter
 {
+    class Triangle;
     class TriangleArray;
     class Vertex;
     class HeightMap;
@@ -42,6 +45,8 @@ namespace FieldConverter
 
         /*Put smallest z to 0*/
         void offsetVertexMap();
+
+        Vect3f VertexArray::computeNormalTriangle(const Triangle& triangle) noexcept;
     };
 }
 #endif //VERTEXARRAY_H
