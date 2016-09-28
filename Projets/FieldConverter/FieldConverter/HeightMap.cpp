@@ -97,16 +97,16 @@ void HeightMap::swap(HeightMap& autre) noexcept
 void HeightMap::writeIntoOutputFile(const std::string& fileName, const std::map<unsigned int, Vertex>& vertexMap, const TriangleArray& triangleArray) const noexcept
 {
     // Execution time : 40s ... But, TP06... Ouch !  :p
-    /*std::string toWrite(std::accumulate(
-                            vertexMap.begin(),
-                            vertexMap.end(),
-                            std::string(""),
-                            [](const std::string& accumulated, const std::pair<unsigned int, Vertex>& indexedVertex) {
-                                return (accumulated + std::to_string(indexedVertex.first) + " " + indexedVertex.second.toString());
-                            }
-                        )
-    );
-    */
+    //std::string toWrite(std::accumulate(
+    //                        vertexMap.begin(),
+    //                        vertexMap.end(),
+    //                        std::string(""),
+    //                        [](const std::string& accumulated, const std::pair<unsigned int, Vertex>& indexedVertex) {
+    //                            return (accumulated + std::to_string(indexedVertex.first) + " " + indexedVertex.second.toString());
+    //                        }
+    //                    )
+    //);
+    
     
     //Execution time : 15s ...  
     std::string toWrite("");

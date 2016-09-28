@@ -87,6 +87,11 @@ void VertexArray::computeNormal(const TriangleArray& mapping) noexcept
         m_vertexMap[mapping.at(i).secondPointIndex()].normalVector() += normale;
         m_vertexMap[mapping.at(i).thirdPointIndex()].normalVector() += normale;
     }
+
+    for (unsigned int iter = 0; iter < m_nbVertices; iter++)
+    {
+        m_vertexMap[iter].normalVector() /= m_vertexMap[iter].normalVector().length();
+    }
 }
 
 Vect3f VertexArray::computeNormalTriangle(const Triangle& triangle) noexcept
