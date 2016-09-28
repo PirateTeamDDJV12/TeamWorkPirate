@@ -14,7 +14,7 @@ Config::Config() : m_width{ 0 }, m_height{ 0 }, m_scale{ 0.0f }, m_path{}
 
 void Config::initialize()
 {
-    std::ifstream configFile("Ressources/heightmap.onf");
+    std::ifstream configFile("Ressources/heightmap.conf");
     std::string type;
     std::string value;
     std::stringstream ss;

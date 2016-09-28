@@ -1,26 +1,18 @@
 /*
 Created by Sun-lay gagneux
 */
-#include "Vertex.h"
-
-#include "HeightMap.h"
+//#include "Vertex.h"
+//#include "Triangle.h"
+//#include "UnitaryTestTriangleArray.h"
 #include "VertexArray.h"
-/*
-#include "Triangle.h"
 #include "TriangleArray.h"
-*/
-#include "UnitaryTestTriangleArray.h"
 #include "Config.hpp"
+#include "HeightMap.h"
 #include <iostream>
-#include <algorithm>
-#include <map>
-
-
-
 
 using namespace FieldConverter;
 using namespace std;
-
+using FieldConverter::Config;
 
 void run(const Vect3f& vect1, const Vect3f& vect2)
 {
@@ -57,30 +49,43 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     vect3 = vect3 / 5.f;
     cout << "Reducing /5 : vect3(" << vect3.x() << " " << vect3.y() << " " << vect3.z() << ")" << endl;
 }
-using FieldConverter::Config;
+
+void runTest(TriangleArray mapArray)
+{
+    Vect3f vect1;
+    Vect3f vect2(10, 5, 5);
+    run(vect1, vect2);
+    vect1.x(-15);
+    vect1.y(5);
+    vect1.z(-15);
+    run(vect1, vect2);
+    Vertex vertexSample;
+
+    cout << mapArray.numberOfPolygone() << " " << mapArray.numberOfPolygoneInColumn() << " " << mapArray.numberOfPolygoneInRow() << " " << mapArray.numberOfTilesInColumn() << " " << mapArray.numberOfTilesInRow() << endl;
+
+    cout << mapArray.toString();
+
+    //UnitaryTest::TriangleArrayUnitTest::run();
+    //cout << UnitaryTest::TriangleArrayUnitTest::getResult();
+}
 
 int main()
 {
-    HeightMap heightmapFile("Ressources/TestHeightMap.raw");
-    VertexArray vArray = VertexArray(heightmapFile, 0.3f);
-    std::vector<Vertex> vList = vArray.getArray();
-    TriangleArray mapArray(257, 257);
-
-    heightmapFile.writeIntoOutputFile("testOutput.txt", heightmapFile.transformToVertexMap(), mapArray);
-
-    /*  LireFichierHeightmap();
-    ConstruireTerrain(float echelleXY, float echelleZ);
-    CalculerNormales();
-    ConstruireIndex();
-    EnregistrerTout();
-    */
-
     try
     {
-        std::cout << Config::getInstance().getPath() << std::endl;
-        std::cout << Config::getInstance().getWidth() << std::endl;
-        std::cout << Config::getInstance().getHeight() << std::endl;
-        std::cout << Config::getInstance().getScale() << std::endl;
+        // Read the file and create an char array with the file informations
+        HeightMap heightmapFile(Config::getInstance().getPath());
+
+        // Create a vertex array (a map) from the heightmap and apply the offset and scale function
+        VertexArray vArray = VertexArray(heightmapFile, Config::getInstance().getScale());
+
+        // Create an triangle array
+        TriangleArray mapArray(Config::getInstance().getWidth(), Config::getInstance().getHeight());
+
+        // Write the vertex array and the triangle array in a file
+        heightmapFile.writeIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
+
+        //runTest(mapArray);
     }
     catch (const std::exception &e)
     {
