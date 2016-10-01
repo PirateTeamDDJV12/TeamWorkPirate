@@ -1,6 +1,9 @@
 #include "VertexArray.h"
 #include "HeightMap.h"
 #include "Vect3f.h"
+#include "Triangle.h"
+#include "TriangleArray.h"
+
 #include <stdlib.h>
 using namespace FieldConverter;
 
@@ -73,5 +76,28 @@ std::map<unsigned, Vertex> VertexArray::getVertexMap() const noexcept
 
 void VertexArray::computeNormal(const TriangleArray& mapping) noexcept
 {
-    //TODO
+    for (int i = 0; i < mapping.numberOfPolygone(); i++)
+    {
+        Vect3f normale = this->computeNormalTriangle(mapping.at(i));
+
+
+        // Add triangle normal to each vertex
+
+        m_vertexMap[mapping.at(i).firstPointIndex()].normalVector() += normale;
+        m_vertexMap[mapping.at(i).secondPointIndex()].normalVector() += normale;
+        m_vertexMap[mapping.at(i).thirdPointIndex()].normalVector() += normale;
+    }
+
+    for (unsigned int iter = 0; iter < m_nbVertices; iter++)
+    {
+        m_vertexMap[iter].normalVector() /= m_vertexMap[iter].normalVector().length();
+    }
+}
+
+Vect3f VertexArray::computeNormalTriangle(const Triangle& triangle) noexcept
+{
+    Vect3f vect1 = m_vertexMap[triangle.secondPointIndex()].position() - m_vertexMap[triangle.firstPointIndex()].position();
+    Vect3f vect2 = m_vertexMap[triangle.thirdPointIndex()].position() - m_vertexMap[triangle.firstPointIndex()].position();
+
+    return vect1.crossProduct(vect2);
 }

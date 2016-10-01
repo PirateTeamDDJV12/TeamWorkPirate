@@ -82,6 +82,9 @@ int main()
         // Create an triangle array
         TriangleArray mapArray(Config::getInstance().getWidth(), Config::getInstance().getHeight());
 
+        // Compute the normals for each point.
+        vArray.computeNormal(mapArray);
+
         // Write the vertex array and the triangle array in a file
         heightmapFile.writeIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
 
