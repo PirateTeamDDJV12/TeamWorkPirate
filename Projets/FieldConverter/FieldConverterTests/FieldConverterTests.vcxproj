@@ -155,7 +155,10 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\FieldConverter\TriangleArray.cpp" />
     <ClCompile Include="..\FieldConverter\Vertex.cpp" />
+    <ClCompile Include="..\FieldConverter\VertexArray.cpp" />
+    <ClCompile Include="TriangleArrayTests.cpp" />
     <ClCompile Include="Vect3fTests.cpp" />
     <ClCompile Include="..\FieldConverter\Triangle.cpp" />
     <ClCompile Include="..\FieldConverter\Vect3f.cpp" />
