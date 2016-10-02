@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BE576624-6E35-4278-9036-3697CD9D70E7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>FieldConverterTest</RootNamespace>
+    <RootNamespace>FieldConverterTests</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>FieldConverterTests</ProjectName>
   </PropertyGroup>
@@ -155,6 +155,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\FieldConverter\Vertex.cpp" />
     <ClCompile Include="Vect3fTests.cpp" />
     <ClCompile Include="..\FieldConverter\Triangle.cpp" />
     <ClCompile Include="..\FieldConverter\Vect3f.cpp" />
@@ -165,6 +166,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TriangleTests.cpp" />
+    <ClCompile Include="VertexTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
