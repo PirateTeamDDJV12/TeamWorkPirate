@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FieldConverter::Config">
+    <Position X="13.5" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="FieldConverter::Config::BadConfigFile">
+        <TypeIdentifier>
+          <NewMemberFileName>Config.hpp</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAgAAACABAIEAAAIAAAAgQASIAAAgAAAAAAA=</HashCode>
+      <FileName>Config.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FieldConverter::TriangleArray">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="FieldConverter::TriangleArray::Tile">
+        <TypeIdentifier>
+          <NewMemberFileName>TriangleArray.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAQCAAAAAACKEAAABAAQAAMgACQAiQAkAAAAAAE=</HashCode>
+      <FileName>TriangleArray.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_buffer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FieldConverter::HeightMap">
+    <Position X="10.25" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="FieldConverter::HeightMap::ErrorLoadingHeightMap">
+        <TypeIdentifier>
+          <NewMemberFileName>HeightMap.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Enum Name="FieldConverter::HeightMap::__unnamed_enum_0079_1">
+        <TypeIdentifier>
+          <NewMemberFileName>HeightMap.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAIAAEAQBUIgAggAQAAEAAACAgQCgAAAAAAA=</HashCode>
+      <FileName>HeightMap.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FieldConverter::Triangle">
+    <Position X="4" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="FieldConverter::Triangle::__unnamed_enum_0081_1">
+        <TypeIdentifier>
+          <NewMemberFileName>Triangle.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QEAAASACAAAAAAABAQAABQAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Triangle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FieldConverter::Vect3f">
+    <Position X="16.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQFAAAQEAQAAAAAAAQABgAQAAAAQ=</HashCode>
+      <FileName>Vect3f.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FieldConverter::Vertex">
+    <Position X="19" Y="6.25" Width="2.25" />
+    <AssociationLine Name="m_normal" Type="FieldConverter::Vect3f" ManuallyRouted="true">
+      <Path>
+        <Point X="20.156" Y="6.25" />
+        <Point X="20.156" Y="3.201" />
+        <Point X="19" Y="3.201" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_position" Type="FieldConverter::Vect3f" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="19" Y="7.375" />
+        <Point X="18.469" Y="7.375" />
+        <Point X="18.469" Y="5.901" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABAAAAAACAJQAAAAAIAABAAAAAAGAAAAA=</HashCode>
+      <FileName>Vertex.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_normal" />
+      <Field Name="m_position" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FieldConverter::VertexArray">
+    <Position X="13.75" Y="6.25" Width="2" />
+    <AssociationLine Name="m_heightMap" Type="FieldConverter::HeightMap" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.75" Y="7.09" />
+        <Point X="13.25" Y="7.09" />
+        <Point X="13.25" Y="8.18" />
+        <Point X="11.688" Y="8.18" />
+        <Point X="11.688" Y="7.93" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_vertexMap" Type="std::map&lt;_Kty, _Ty, _Pr, _Alloc&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.75" Y="9.062" />
+        <Point X="17.625" Y="9.062" />
+        <Point X="17.625" Y="8.191" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAIAACAAAECAAAADAACAAAAAADAAAEAAAAA=</HashCode>
+      <FileName>VertexArray.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_heightMap" />
+      <Field Name="m_vertexMap" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FieldConverter::UnitaryTest::TriangleArrayUnitTest">
+    <Position X="7" Y="0.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="FieldConverter::UnitaryTest::TriangleArrayUnitTest::ProblemMappingArray" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UnitaryTestTriangleArray.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="FieldConverter::UnitaryTest::TriangleArrayUnitTest::ProblemPolygoneNumber" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UnitaryTestTriangleArray.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="FieldConverter::UnitaryTest::TriangleArrayUnitTest::ProblemPolygoneInWidth" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UnitaryTestTriangleArray.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="FieldConverter::UnitaryTest::TriangleArrayUnitTest::ProblemPolygoneInHeight" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UnitaryTestTriangleArray.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="FieldConverter::UnitaryTest::TriangleArrayUnitTest::ProblemTilesInHeight" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UnitaryTestTriangleArray.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="FieldConverter::UnitaryTest::TriangleArrayUnitTest::ProblemTilesInWidth" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UnitaryTestTriangleArray.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="m_testerInstance" Type="FieldConverter::UnitaryTest::TriangleArrayUnitTest" ManuallyRouted="true">
+      <Path>
+        <Point X="7.975" Y="9.322" />
+        <Point X="7.975" Y="9.675" />
+        <Point X="8.794" Y="9.675" />
+        <Point X="8.794" Y="9.322" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AgAMAgAAAICAAAAABQAAAAAABAJAwgBAAIAgAAAIAIA=</HashCode>
+      <FileName>UnitaryTestTriangleArray.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_array" />
+      <Field Name="m_testerInstance" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="std::map&lt;_Kty, _Ty, _Pr, _Alloc&gt;" Collapsed="true">
+    <Position X="16.25" Y="7.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAABAAACQAAAAAAIAAAEBBAAAgAAgAAAAAAA=</HashCode>
+      <FileName>c:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\map</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

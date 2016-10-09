@@ -4,9 +4,11 @@ Created by Sun-lay Gagneux
 #include "HeightMap.h"
 
 #include "TriangleArray.h"
+#include "Triangle.h"
 
 #include <algorithm>
 //#include <numeric>
+#include <iterator>
 #include <fstream>
 
 using namespace FieldConverter;
@@ -120,4 +122,48 @@ void HeightMap::writeIntoOutputFile(const std::string& fileName, const std::map<
     toWrite += ("\n" + triangleArray.toString());
 
     std::ofstream{ fileName }.write(toWrite.c_str(), toWrite.size());
+}
+
+void HeightMap::writeBinaryIntoOutputFile(const std::string& fileName, const std::map<unsigned int, Vertex>& vertexMap, const TriangleArray& triangleArray) const noexcept
+{
+    std::ofstream outputFile{ fileName, std::ios::binary };
+
+    size_t totSize = vertexMap.size() * (sizeof(Vertex) + 4) + triangleArray.numberOfPolygone() * sizeof(Triangle);
+
+    char* toWrite = new char[totSize];
+
+    size_t iter = 0;
+    std::for_each(vertexMap.begin(),
+                  vertexMap.end(),
+                  [&toWrite, &iter](std::pair<unsigned int, Vertex> vert) {
+                    toWrite[iter] = vert.first;
+                    ++iter;
+                    toWrite[iter] = vert.second.position().x();
+                    ++iter;
+                    toWrite[iter] = vert.second.position().y();
+                    ++iter;
+                    toWrite[iter] = vert.second.position().z();
+                    ++iter;
+                    toWrite[iter] = vert.second.normalVector().x();
+                    ++iter;
+                    toWrite[iter] = vert.second.normalVector().y();
+                    ++iter;
+                    toWrite[iter] = vert.second.normalVector().z();
+                    ++iter;
+                  }
+    );
+
+    std::for_each(triangleArray.begin(),
+                  triangleArray.end(),
+                  [&toWrite, &iter](Triangle triangle) {
+                    toWrite[iter] = triangle.firstPointIndex();
+                    ++iter;
+                    toWrite[iter] = triangle.secondPointIndex();
+                    ++iter;
+                    toWrite[iter] = triangle.thirdPointIndex();
+                    ++iter;
+                  }
+    );
+
+    std::copy(toWrite, toWrite + totSize, std::ostreambuf_iterator<char>{std::ofstream{ fileName, std::ios::binary }});
 }
