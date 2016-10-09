@@ -129,14 +129,16 @@ void HeightMap::writeBinaryIntoOutputFile(const std::string& fileName, const std
 {
     std::ofstream outputFile{ fileName, std::ios::binary };
 
-    size_t totSize = vertexMap.size() * (sizeof(Vertex) + 4) + triangleArray.numberOfPolygone() * sizeof(Triangle);
+    size_t totSize = 4 + vertexMap.size() * (sizeof(Vertex) + 4) + triangleArray.numberOfPolygone() * sizeof(Triangle);
 
     char* toWrite = new char[totSize];
 
-    BinaryFast binIntermediary;
-    
-
+    BinaryFast binIntermediary{ static_cast<uint32_t>(vertexMap.size()) };
     size_t iter = 0;
+    
+    binIntermediary.put<BinaryFast::Save>(toWrite, iter);
+    iter += 4;
+
     std::for_each(vertexMap.begin(),
                   vertexMap.end(),
                   [&toWrite, &iter, &binIntermediary](std::pair<unsigned int, Vertex> vert) {
