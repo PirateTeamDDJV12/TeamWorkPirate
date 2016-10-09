@@ -28,6 +28,9 @@
     <ClCompile Include="Config.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="BinaryFast.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeightMap.h">
@@ -54,15 +57,18 @@
     <ClInclude Include="Config.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="BinaryFast.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{92757c57-da27-47e9-a1fd-3d02519ec61d}</UniqueIdentifier>
-	  <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="Sources">
       <UniqueIdentifier>{5e48996a-f9b3-4093-8683-e41eb5de779c}</UniqueIdentifier>
-	  <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
 </Project>

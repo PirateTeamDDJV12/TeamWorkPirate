@@ -1,12 +1,19 @@
 #ifndef BINARYFAST_H
 #define BINARYFAST_H
 
+#include <type_traits>
+
 #include <stdint.h>
 
 namespace FieldConverter
 {
     class BinaryFast
     {
+    public:
+        struct Load{};
+        struct Save{};
+
+
     public:
         struct Binary32
         {
@@ -94,6 +101,26 @@ namespace FieldConverter
             m_byte32 = newValue;
         }
 
+        void setBinary(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4) noexcept;
+
+        /*
+        Template method that load or set a value from or into a buffer at the specified offset
+        use as : 
+          put<BinaryFast::Save>(bufferToSave, positionInBufferToSave);
+          put<BinaryFast::Load>(bufferToLoad, positionInBufferToLoadFrom);
+        */
+        template<class Mode>
+        void put(char* output, size_t offset) noexcept
+        {
+            this->put(output, offset, std::conditional_t<std::is_same<Mode, Save>::value,
+                      Save,
+                      std::conditional_t<std::is_same<Mode, Load>::value,
+                          Load,
+                          Mode>>
+            {}
+            );
+        }
+
 
     public:
         bool operator==(const Binary32& other) const noexcept;
@@ -123,7 +150,17 @@ namespace FieldConverter
             return !(*this == other);
         }
 
-        void operator()(char* output) const noexcept;
+        void operator()(uint32_t valueToSave, char* buffer, size_t& offset) noexcept;
+        void operator()(float valueToSave, char* buffer, size_t& offset) noexcept;
+
+
+    private:
+        void put(char* output, size_t offset, Save) const noexcept;
+
+        void put(char* output, size_t offset, Load) noexcept
+        {
+            this->setBinary(*(output + offset), *(output + offset + 1), *(output + offset + 2), *(output + offset + 3));
+        }
     };
 }
 

@@ -5,6 +5,7 @@ Created by Sun-lay Gagneux
 
 #include "TriangleArray.h"
 #include "Triangle.h"
+#include "BinaryFast.h"
 
 #include <algorithm>
 //#include <numeric>
@@ -132,36 +133,29 @@ void HeightMap::writeBinaryIntoOutputFile(const std::string& fileName, const std
 
     char* toWrite = new char[totSize];
 
+    BinaryFast binIntermediary;
+    
+
     size_t iter = 0;
     std::for_each(vertexMap.begin(),
                   vertexMap.end(),
-                  [&toWrite, &iter](std::pair<unsigned int, Vertex> vert) {
-                    toWrite[iter] = vert.first;
-                    ++iter;
-                    toWrite[iter] = vert.second.position().x();
-                    ++iter;
-                    toWrite[iter] = vert.second.position().y();
-                    ++iter;
-                    toWrite[iter] = vert.second.position().z();
-                    ++iter;
-                    toWrite[iter] = vert.second.normalVector().x();
-                    ++iter;
-                    toWrite[iter] = vert.second.normalVector().y();
-                    ++iter;
-                    toWrite[iter] = vert.second.normalVector().z();
-                    ++iter;
+                  [&toWrite, &iter, &binIntermediary](std::pair<unsigned int, Vertex> vert) {
+                        binIntermediary(vert.first, toWrite, iter);
+                        binIntermediary(vert.second.position().x(), toWrite, iter);
+                        binIntermediary(vert.second.position().y(), toWrite, iter);
+                        binIntermediary(vert.second.position().z(), toWrite, iter);
+                        binIntermediary(vert.second.normalVector().x(), toWrite, iter);
+                        binIntermediary(vert.second.normalVector().y(), toWrite, iter);
+                        binIntermediary(vert.second.normalVector().z(), toWrite, iter);
                   }
     );
 
     std::for_each(triangleArray.begin(),
                   triangleArray.end(),
-                  [&toWrite, &iter](Triangle triangle) {
-                    toWrite[iter] = triangle.firstPointIndex();
-                    ++iter;
-                    toWrite[iter] = triangle.secondPointIndex();
-                    ++iter;
-                    toWrite[iter] = triangle.thirdPointIndex();
-                    ++iter;
+                  [&toWrite, &iter, &binIntermediary](Triangle triangle) {
+                        binIntermediary(triangle.firstPointIndex(), toWrite, iter);
+                        binIntermediary(triangle.secondPointIndex(), toWrite, iter);
+                        binIntermediary(triangle.thirdPointIndex(), toWrite, iter);
                   }
     );
 
