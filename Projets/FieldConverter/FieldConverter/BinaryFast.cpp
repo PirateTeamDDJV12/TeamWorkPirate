@@ -7,9 +7,9 @@ using namespace FieldConverter;
 void BinaryFast::setBinary(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4) noexcept
 {
     m_byte32.m_firstByte = byte1;
-    m_byte32.m_firstByte = byte2;
-    m_byte32.m_firstByte = byte3;
-    m_byte32.m_firstByte = byte4;
+    m_byte32.m_secondByte = byte2;
+    m_byte32.m_thirdByte = byte3;
+    m_byte32.m_fourthByte = byte4;
 }
 
 bool BinaryFast::operator==(const Binary32& other) const noexcept
