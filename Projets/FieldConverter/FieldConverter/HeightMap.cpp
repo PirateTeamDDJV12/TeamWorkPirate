@@ -127,8 +127,6 @@ void HeightMap::writeIntoOutputFile(const std::string& fileName, const std::map<
 
 void HeightMap::writeBinaryIntoOutputFile(const std::string& fileName, const std::map<unsigned int, Vertex>& vertexMap, const TriangleArray& triangleArray) const noexcept
 {
-    std::ofstream outputFile{ fileName, std::ios::binary };
-
     size_t totSize = 4 + vertexMap.size() * (sizeof(Vertex) + 4) + triangleArray.numberOfPolygone() * sizeof(Triangle);
 
     char* toWrite = new char[totSize];
@@ -162,4 +160,6 @@ void HeightMap::writeBinaryIntoOutputFile(const std::string& fileName, const std
     );
 
     std::copy(toWrite, toWrite + totSize, std::ostreambuf_iterator<char>{std::ofstream{ fileName, std::ios::binary }});
+
+    delete[] toWrite;
 }
