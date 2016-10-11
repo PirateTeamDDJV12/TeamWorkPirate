@@ -120,6 +120,10 @@ namespace FieldConverter
                                  const std::map<unsigned int, Vertex>& vertexMap, 
                                  const TriangleArray& triangleArray) const noexcept;
 
+        void writeBinaryIntoOutputFile(const std::string& fileName,
+                                       const std::map<unsigned int, Vertex>& vertexMap,
+                                       const TriangleArray& triangleArray) const noexcept;
+
 
     private:
         void load(const std::string& pathFile);
