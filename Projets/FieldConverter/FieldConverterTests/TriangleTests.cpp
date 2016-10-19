@@ -3,6 +3,9 @@
 
 #include "../FieldConverter/Triangle.h"
 
+#include <vector>
+#include <algorithm>
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace FieldConverter;
 
@@ -38,34 +41,40 @@ namespace FieldConverterTest
 
         TEST_METHOD(triangleEqualOperatorTest)
         {
-            Triangle t1(1, 1, 1);
-            Triangle t2(1, 1, 1);
-            Triangle t3(0, 1, 1);
-            Triangle t4(1, 0, 1);
-            Triangle t5(1, 1, 0);
-            Triangle t6(1, 0, 0);
-            Triangle t7(0, 1, 0);
-            Triangle t8(0, 0, 1);
-            Triangle t9(0, 0, 0);
+            Triangle t(1, 1, 1);
 
-            Assert::IsTrue(t1 == t2);
-            Assert::IsFalse(t1 == t3 || t1 == t4 || t1 == t5 || t1 == t6 || t1 == t7 || t1 == t8 || t1 == t9);
+            std::vector<Triangle> v =
+            {
+                Triangle(0, 1, 1),
+                Triangle(1, 0, 1),
+                Triangle(1, 1, 0),
+                Triangle(1, 0, 0),
+                Triangle(0, 1, 0),
+                Triangle(0, 0, 1),
+                Triangle(0, 0, 0)
+            };
+
+            Assert::IsTrue(t == t);
+            Assert::IsFalse(std::any_of(v.cbegin(), v.cend(), [&t](Triangle ti) { return ti == t; }));
         }
 
         TEST_METHOD(triangleNotEqualOperatorTest)
         {
-            Triangle t1(1, 1, 1);
-            Triangle t2(1, 1, 1);
-            Triangle t3(0, 1, 1);
-            Triangle t4(1, 0, 1);
-            Triangle t5(1, 1, 0);
-            Triangle t6(1, 0, 0);
-            Triangle t7(0, 1, 0);
-            Triangle t8(0, 0, 1);
-            Triangle t9(0, 0, 0);
+            Triangle t(1, 1, 1);
 
-            Assert::IsFalse(t1 != t2);
-            Assert::IsTrue(t1 != t3 && t1 != t4 && t1 != t5 && t1 != t6 && t1 != t7 && t1 != t8 && t1 != t9);
+            std::vector<Triangle> v = 
+            {   
+                Triangle(0, 1, 1), 
+                Triangle(1, 0, 1), 
+                Triangle(1, 1, 0), 
+                Triangle(1, 0, 0), 
+                Triangle(0, 1, 0), 
+                Triangle(0, 0, 1), 
+                Triangle(0, 0, 0) 
+            };
+
+            Assert::IsFalse(t != t);
+            Assert::IsTrue(std::all_of(v.cbegin(), v.cend(), [&t](Triangle ti) { return ti != t; }));
         }
     };
 
