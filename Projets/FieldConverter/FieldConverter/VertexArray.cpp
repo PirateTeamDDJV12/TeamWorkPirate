@@ -37,7 +37,7 @@ std::map<unsigned, Vertex> VertexArray::transformToVertexMap() const
         float col = i - (m_heightMap.width() * row);
         float zPos = static_cast<float>(m_heightMap.at(i));
 
-        myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(row, col, zPos, 0.0f, 0.0f, 0.0f)));
+        myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(col, row, zPos, 0.0f, 0.0f, 0.0f)));
     }
     return myVertexMap;
 }
