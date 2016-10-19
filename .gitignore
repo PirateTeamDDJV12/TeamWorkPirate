@@ -12,3 +12,6 @@ Projets/*/Release/*
 
 Projets/*/*/x64/*
 Projets/*/x64/*
+
+
+**/testOutput.txt
