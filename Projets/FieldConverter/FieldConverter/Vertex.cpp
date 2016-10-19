@@ -9,8 +9,8 @@ using namespace FieldConverter;
 
 void Vertex::writeVectIntoStdString(std::stringstream& container, const Vect3f& valueToWrite) const noexcept
 {
-    container << valueToWrite.x() << SPACE_SEPARATOR;
-    container << valueToWrite.y() << SPACE_SEPARATOR;
+    container << valueToWrite.x() << ' ';
+    container << valueToWrite.y() << ' ';
     container << valueToWrite.z();
 }
 
@@ -19,10 +19,10 @@ std::string Vertex::toString() const noexcept
     std::stringstream intermediaryStr;
 
     writeVectIntoStdString(intermediaryStr, position());
-    intermediaryStr << SPACE_SEPARATOR;
+    intermediaryStr << ' ';
 
     writeVectIntoStdString(intermediaryStr, normalVector());
-    intermediaryStr << LINE_JUMP_SEPARATOR;
+    intermediaryStr << '\n';
 
     return intermediaryStr.str();
 }

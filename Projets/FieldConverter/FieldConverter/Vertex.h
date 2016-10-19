@@ -16,11 +16,6 @@ namespace FieldConverter
     class Vertex
     {
     private:
-        const char SPACE_SEPARATOR = ' ';
-        const char LINE_JUMP_SEPARATOR = '\n';
-
-
-    private:
         Vect3f m_position;
         Vect3f m_normal;
 

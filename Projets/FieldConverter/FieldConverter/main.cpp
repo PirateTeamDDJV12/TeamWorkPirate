@@ -87,6 +87,7 @@ int main()
 
         // Write the vertex array and the triangle array in a file
         heightmapFile.writeIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
+        //heightmapFile.writeBinaryIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
 
         //runTest(mapArray);
     }

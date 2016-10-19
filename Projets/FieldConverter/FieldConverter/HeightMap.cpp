@@ -4,9 +4,12 @@ Created by Sun-lay Gagneux
 #include "HeightMap.h"
 
 #include "TriangleArray.h"
+#include "Triangle.h"
+#include "BinaryFast.h"
 
 #include <algorithm>
 //#include <numeric>
+#include <iterator>
 #include <fstream>
 
 using namespace FieldConverter;
@@ -120,4 +123,43 @@ void HeightMap::writeIntoOutputFile(const std::string& fileName, const std::map<
     toWrite += ("\n" + triangleArray.toString());
 
     std::ofstream{ fileName }.write(toWrite.c_str(), toWrite.size());
+}
+
+void HeightMap::writeBinaryIntoOutputFile(const std::string& fileName, const std::map<unsigned int, Vertex>& vertexMap, const TriangleArray& triangleArray) const noexcept
+{
+    size_t totSize = 4 + vertexMap.size() * (sizeof(Vertex) + 4) + triangleArray.numberOfPolygone() * sizeof(Triangle);
+
+    char* toWrite = new char[totSize];
+
+    BinaryFast binIntermediary{ static_cast<uint32_t>(vertexMap.size()) };
+    size_t iter = 0;
+    
+    binIntermediary.put<BinaryFast::Save>(toWrite, iter);
+    iter += 4;
+
+    std::for_each(vertexMap.begin(),
+                  vertexMap.end(),
+                  [&toWrite, &iter, &binIntermediary](std::pair<unsigned int, Vertex> vert) {
+                        binIntermediary(vert.first, toWrite, iter);
+                        binIntermediary(vert.second.position().x(), toWrite, iter);
+                        binIntermediary(vert.second.position().y(), toWrite, iter);
+                        binIntermediary(vert.second.position().z(), toWrite, iter);
+                        binIntermediary(vert.second.normalVector().x(), toWrite, iter);
+                        binIntermediary(vert.second.normalVector().y(), toWrite, iter);
+                        binIntermediary(vert.second.normalVector().z(), toWrite, iter);
+                  }
+    );
+
+    std::for_each(triangleArray.begin(),
+                  triangleArray.end(),
+                  [&toWrite, &iter, &binIntermediary](Triangle triangle) {
+                        binIntermediary(triangle.firstPointIndex(), toWrite, iter);
+                        binIntermediary(triangle.secondPointIndex(), toWrite, iter);
+                        binIntermediary(triangle.thirdPointIndex(), toWrite, iter);
+                  }
+    );
+
+    std::copy(toWrite, toWrite + totSize, std::ostreambuf_iterator<char>{std::ofstream{ fileName, std::ios::binary }});
+
+    delete[] toWrite;
 }
