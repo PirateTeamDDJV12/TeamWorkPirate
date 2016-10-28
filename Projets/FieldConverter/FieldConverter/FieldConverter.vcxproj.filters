@@ -60,6 +60,9 @@
     <ClInclude Include="BinaryFast.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Vect2f.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

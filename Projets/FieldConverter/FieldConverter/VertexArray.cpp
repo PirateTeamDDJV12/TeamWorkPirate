@@ -8,14 +8,14 @@
 using namespace FieldConverter;
 
 
-VertexArray::VertexArray(const HeightMap& heightmap, float scale)
+VertexArray::VertexArray(const HeightMap& heightmap, float scale, unsigned int textureRepeat)
     :
     m_heightMap{heightmap},
     m_scale{scale},
     m_nbVertices{heightmap.size()}
 {
     // Transform the heightmap into a map with index and Vertex
-    m_vertexMap = transformToVertexMap();
+    m_vertexMap = transformToVertexMap(textureRepeat);
 
     // Change all the vertex to remove an useless offset
     offsetVertexMap();
@@ -24,21 +24,45 @@ VertexArray::VertexArray(const HeightMap& heightmap, float scale)
     scaleVertexMap();
 }
 
-std::map<unsigned, Vertex> VertexArray::transformToVertexMap() const
+std::map<unsigned, Vertex> VertexArray::transformToVertexMap(unsigned int textureRepeat) const
 {
     std::map<unsigned int, Vertex> myVertexMap;
     float row = 0;
-    for(unsigned int i = 0; i < m_heightMap.size(); i++)
+    if (textureRepeat == 0)
     {
-        if(i != 0 && i % m_heightMap.width() == 0)
+        for (unsigned int i = 0; i < m_heightMap.size(); i++)
         {
-            row++;
-        }
-        float col = i - (m_heightMap.width() * row);
-        float zPos = static_cast<float>(m_heightMap.at(i));
+            if (i != 0 && i % m_heightMap.width() == 0)
+            {
+                row++;
+            }
+            float col = i - (m_heightMap.width() * row);
+            float zPos = static_cast<float>(m_heightMap.at(i));
 
-        myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(col, row, zPos, 0.0f, 0.0f, 0.0f)));
+            myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(
+                col, row, zPos, 
+                0.0f, 0.0f, 0.0f, 
+                col / static_cast<float>(m_heightMap.width()), row / static_cast<float>(m_heightMap.height()))));
+        }
     }
+    else
+    {
+        for (unsigned int i = 0; i < m_heightMap.size(); i++)
+        {
+            if (i != 0 && i % m_heightMap.width() == 0)
+            {
+                row++;
+            }
+            float col = i - (m_heightMap.width() * row);
+            float zPos = static_cast<float>(m_heightMap.at(i));
+
+            myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(
+                col, row, zPos,
+                0.0f, 0.0f, 0.0f,
+                col / static_cast<float>(textureRepeat), row / static_cast<float>(textureRepeat))));
+        }
+    }
+    
     return myVertexMap;
 }
 

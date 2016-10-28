@@ -21,7 +21,7 @@ namespace FieldConverter
         unsigned int m_nbVertices;
 
     public:
-        VertexArray(const HeightMap& heightmap, float scale);
+        VertexArray(const HeightMap& heightmap, float scale, unsigned int textureRepeat);
 
         ~VertexArray()
         {
@@ -38,7 +38,7 @@ namespace FieldConverter
         Transform the actual Heightmap in a map with an index and a Vertex
         We use this function to create all the Vertex of the Heightmap and their index
         */
-        std::map<unsigned int, Vertex> transformToVertexMap() const;
+        std::map<unsigned int, Vertex> transformToVertexMap(unsigned int textureRepeat) const;
 
         /*Rescale z data*/
         void scaleVertexMap();
