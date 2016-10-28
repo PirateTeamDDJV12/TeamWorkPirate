@@ -14,6 +14,12 @@ void Vertex::writeVectIntoStdString(std::stringstream& container, const Vect3f& 
     container << valueToWrite.z();
 }
 
+void Vertex::writeVectIntoStdString(std::stringstream& container, const Vect2f& valueToWrite) const noexcept
+{
+    container << valueToWrite.m_U << ' ';
+    container << valueToWrite.m_V << ' ';
+}
+
 std::string Vertex::toString() const noexcept
 {
     std::stringstream intermediaryStr;
@@ -22,6 +28,9 @@ std::string Vertex::toString() const noexcept
     intermediaryStr << ' ';
 
     writeVectIntoStdString(intermediaryStr, normalVector());
+    intermediaryStr << ' ';
+
+    writeVectIntoStdString(intermediaryStr, getTextureCoordinate());
     intermediaryStr << '\n';
 
     return intermediaryStr.str();
