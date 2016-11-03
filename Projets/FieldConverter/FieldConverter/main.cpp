@@ -77,7 +77,7 @@ int main()
         HeightMap heightmapFile(Config::getInstance().getPath());
 
         // Create a vertex array (a map) from the heightmap and apply the offset and scale function
-        VertexArray vArray = VertexArray(heightmapFile, Config::getInstance().getScale());
+        VertexArray vArray = VertexArray(heightmapFile, Config::getInstance().getScale(), Config::getInstance().getTextureMappingRepetition());
 
         // Create an triangle array
         TriangleArray mapArray(Config::getInstance().getWidth(), Config::getInstance().getHeight());

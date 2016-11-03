@@ -46,6 +46,10 @@ void Config::initialize()
         {
             ss >> m_scale;
         }
+        else if (type == "repeat")
+        {
+            ss >> m_textureMappingRepetition;
+        }
         ss.str(std::string());
         ss.clear();
     }
@@ -83,6 +87,11 @@ float Config::getScale() const
 std::string Config::getPath() const
 {
     return m_path;
+}
+
+unsigned int Config::getTextureMappingRepetition() const
+{
+    return m_textureMappingRepetition;
 }
 
 Config::~Config()

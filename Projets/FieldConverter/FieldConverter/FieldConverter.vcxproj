@@ -160,6 +160,7 @@
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="TriangleArray.h" />
     <ClInclude Include="UnitaryTestTriangleArray.h" />
+    <ClInclude Include="Vect2f.h" />
     <ClInclude Include="Vect3f.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexArray.h" />
