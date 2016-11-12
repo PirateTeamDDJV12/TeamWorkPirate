@@ -13,5 +13,7 @@ Projets/*/Release/*
 Projets/*/*/x64/*
 Projets/*/x64/*
 
-
 **/testOutput.txt
+
+Projets/*/*/ipch/*
+Projets/*/ipch/*
