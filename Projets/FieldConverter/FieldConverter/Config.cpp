@@ -5,9 +5,9 @@
 
 using FieldConverter::Config;
 
-std::unique_ptr<Config> Config::m_instance = nullptr;
+Config* Config::m_instance;
 
-Config::Config() : m_width{ 0 }, m_height{ 0 }, m_scale{ 0.0f }, m_path{}
+Config::Config() : m_width{0}, m_height{0}, m_scale{0.0f}, m_path{}, m_offset{0.0f}
 {
     initialize();
 }
@@ -20,53 +20,57 @@ void Config::initialize()
     std::stringstream ss;
 
 
-    if (configFile.bad() || configFile.fail())
+    if(configFile.bad() || configFile.fail())
     {
         throw BadConfigFile("ERROR : Wrong config file path");
     }
-    while (std::getline(configFile, type, '='))
+    while(std::getline(configFile, type, '='))
     {
         std::getline(configFile, value);
 
         ss << value;
 
-        if (type == "path")
+        if(type == "path")
         {
             ss >> m_path;
         }
-        else if (type == "width")
+        else if(type == "width")
         {
             ss >> m_width;
         }
-        else if (type == "height")
+        else if(type == "height")
         {
             ss >> m_height;
         }
-        else if (type == "scale")
+        else if(type == "scale")
         {
             ss >> m_scale;
         }
-        else if (type == "repeat")
+        else if(type == "repeat")
         {
             ss >> m_textureMappingRepetition;
+        }
+        else if(type == "offset")
+        {
+            ss >> m_offset;
         }
         ss.str(std::string());
         ss.clear();
     }
-    if (m_width != m_height || m_width == 0 || m_path.empty())
+    if(m_width != m_height || m_width == 0 || m_path.empty())
     {
         throw BadConfigFile("ERROR : Wrong config file content");
     }
 }
 
-Config &Config::getInstance()
+Config* Config::getInstance()
 {
-    if (m_instance == nullptr)
+    if(m_instance == nullptr)
     {
-        m_instance.reset(new Config);
+        m_instance = new Config;
     }
 
-    return *m_instance;
+    return m_instance;
 }
 
 int Config::getWidth() const
@@ -84,6 +88,11 @@ float Config::getScale() const
     return m_scale;
 }
 
+float Config::getOffset() const
+{
+    return m_offset;
+}
+
 std::string Config::getPath() const
 {
     return m_path;
@@ -95,5 +104,4 @@ unsigned int Config::getTextureMappingRepetition() const
 }
 
 Config::~Config()
-{
-}
+{}

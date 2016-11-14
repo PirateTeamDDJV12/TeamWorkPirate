@@ -73,20 +73,21 @@ int main()
 {
     try
     {
+        float offset = FieldConverter::Config::getInstance()->getOffset();
         // Read the file and create an char array with the file informations
-        HeightMap heightmapFile(Config::getInstance().getPath());
+        HeightMap heightmapFile(Config::getInstance()->getPath());
 
         // Create a vertex array (a map) from the heightmap and apply the offset and scale function
-        VertexArray vArray = VertexArray(heightmapFile, Config::getInstance().getScale(), Config::getInstance().getTextureMappingRepetition());
+        VertexArray vArray = VertexArray(heightmapFile, Config::getInstance()->getScale(), Config::getInstance()->getTextureMappingRepetition());
 
         // Create an triangle array
-        TriangleArray mapArray(Config::getInstance().getWidth(), Config::getInstance().getHeight());
+        TriangleArray mapArray(Config::getInstance()->getWidth(), Config::getInstance()->getHeight());
 
         // Compute the normals for each point.
         vArray.computeNormal(mapArray);
 
         // Write the vertex array and the triangle array in a file
-        heightmapFile.writeIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
+        heightmapFile.writeIntoOutputFile("heightmapOutput.txt", vArray.getVertexMap(), mapArray);
         //heightmapFile.writeBinaryIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
 
         //runTest(mapArray);

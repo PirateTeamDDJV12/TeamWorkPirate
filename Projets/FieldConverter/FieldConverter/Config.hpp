@@ -24,8 +24,9 @@ namespace FieldConverter
         unsigned int                    m_width;
         unsigned int                    m_height;
         float                           m_scale;
+        float                           m_offset;
         std::string                     m_path;
-        static std::unique_ptr<Config>  m_instance;
+        static Config*                  m_instance;
         unsigned int                    m_textureMappingRepetition;
 
         Config();
@@ -35,12 +36,13 @@ namespace FieldConverter
         Config &operator=(const Config& other) = delete;
 
 
-        static Config   &getInstance();
+        static Config*  getInstance();
         void            initialize();
 
         int             getWidth() const;
         int             getHeight() const;
         float           getScale() const;
+        float           getOffset() const;
         std::string     getPath() const;
         unsigned int    getTextureMappingRepetition() const;
 

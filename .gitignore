@@ -13,7 +13,7 @@ Projets/*/Release/*
 Projets/*/*/x64/*
 Projets/*/x64/*
 
-**/testOutput.txt
+**/heightmapOutput.txt
 
 Projets/*/*/ipch/*
 Projets/*/ipch/*
