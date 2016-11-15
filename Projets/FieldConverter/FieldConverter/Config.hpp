@@ -26,6 +26,7 @@ namespace FieldConverter
         unsigned int                    m_height;
         float                           m_scale;
         float                           m_offset;
+        float                           m_mapScale;
         std::string                     m_path;
         static Config*                  m_instance;
         unsigned int                    m_textureMappingRepetition;
@@ -44,6 +45,7 @@ namespace FieldConverter
         int             getHeight() const;
         float           getScale() const;
         float           getOffset() const;
+        float           getMapScale() const;
         std::string     getPath() const;
         unsigned int    getTextureMappingRepetition() const;
 

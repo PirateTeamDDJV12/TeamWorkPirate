@@ -54,6 +54,10 @@ void Config::initialize()
         {
             ss >> m_offset;
         }
+        else if(type == "mapscale")
+        {
+            ss >> m_mapScale;
+        }
         ss.str(std::string());
         ss.clear();
     }
@@ -91,6 +95,11 @@ float Config::getScale() const
 float Config::getOffset() const
 {
     return m_offset;
+}
+
+float Config::getMapScale() const
+{
+    return m_mapScale;
 }
 
 std::string Config::getPath() const
