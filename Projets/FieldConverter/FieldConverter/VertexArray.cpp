@@ -4,8 +4,7 @@
 #include "Triangle.h"
 #include "TriangleArray.h"
 
-#include <stdlib.h>
-#include "Config.hpp"
+#include "Config/Config.hpp"
 using namespace FieldConverter;
 
 

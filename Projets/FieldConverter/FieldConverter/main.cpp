@@ -6,7 +6,7 @@ Created by Sun-lay gagneux
 //#include "UnitaryTestTriangleArray.h"
 #include "VertexArray.h"
 #include "TriangleArray.h"
-#include "Config.hpp"
+#include "Config/Config.hpp"
 #include "HeightMap.h"
 #include <iostream>
 
@@ -73,7 +73,6 @@ int main()
 {
     try
     {
-        float offset = FieldConverter::Config::getInstance()->getOffset();
         // Read the file and create an char array with the file informations
         HeightMap heightmapFile(Config::getInstance()->getPath());
 

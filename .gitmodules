@@ -1,0 +1,3 @@
+[submodule "Projets/FieldConverter/FieldConverter/Config"]
+	path = Projets/FieldConverter/FieldConverter/Config
+	url = https://github.com/PirateTeamDDJV12/ConfigRepo

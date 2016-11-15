@@ -25,11 +25,11 @@
     <ClCompile Include="VertexArray.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Config.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="BinaryFast.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\Config.cpp">
+      <Filter>Sources\Config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,14 +54,14 @@
     <ClInclude Include="UnitaryTestTriangleArray.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Config.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="BinaryFast.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Vect2f.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\Config.hpp">
+      <Filter>Headers\Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +72,12 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{5e48996a-f9b3-4093-8683-e41eb5de779c}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headers\Config">
+      <UniqueIdentifier>{980eb4f1-d954-414a-bd5f-c46fab95eeed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Config">
+      <UniqueIdentifier>{b8a14f01-2c5f-40ca-bac3-1603b6d77a1c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
