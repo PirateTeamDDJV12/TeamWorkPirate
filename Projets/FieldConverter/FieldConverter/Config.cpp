@@ -58,6 +58,14 @@ void Config::initialize()
         {
             ss >> m_mapScale;
         }
+        else if(type == "exportName")
+        {
+            ss >> m_exportName;
+        }
+        else if(type == "texturePath")
+        {
+            ss >> m_texturePath;
+        }
         ss.str(std::string());
         ss.clear();
     }
@@ -100,6 +108,16 @@ float Config::getOffset() const
 float Config::getMapScale() const
 {
     return m_mapScale;
+}
+
+std::string Config::getExportName() const
+{
+    return m_exportName;
+}
+
+std::string Config::getTexturePath() const
+{
+    return m_texturePath;
 }
 
 std::string Config::getPath() const

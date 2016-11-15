@@ -1,9 +1,7 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#include <string>
 #include <stdexcept>
-#include <memory>
 
 namespace FieldConverter
 {
@@ -28,6 +26,8 @@ namespace FieldConverter
         float                           m_offset;
         float                           m_mapScale;
         std::string                     m_path;
+        std::string                     m_exportName;
+        std::string                     m_texturePath;
         static Config*                  m_instance;
         unsigned int                    m_textureMappingRepetition;
 
@@ -46,6 +46,8 @@ namespace FieldConverter
         float           getScale() const;
         float           getOffset() const;
         float           getMapScale() const;
+        std::string     getExportName() const;
+        std::string     getTexturePath() const;
         std::string     getPath() const;
         unsigned int    getTextureMappingRepetition() const;
 
