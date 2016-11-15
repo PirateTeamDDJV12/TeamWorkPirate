@@ -12,7 +12,7 @@ Created by Sun-lay gagneux
 
 using namespace FieldConverter;
 using namespace std;
-using FieldConverter::Config;
+using PirateSimulator::Config;
 
 void run(const Vect3f& vect1, const Vect3f& vect2)
 {

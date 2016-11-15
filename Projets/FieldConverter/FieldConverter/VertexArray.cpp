@@ -58,8 +58,8 @@ std::map<unsigned, Vertex> VertexArray::transformToVertexMap(unsigned int textur
 
 void VertexArray::scaleVertexMap()
 {
-    float offset = Config::getInstance()->getOffset();
-    float mapScale = Config::getInstance()->getMapScale();
+    float offset = PirateSimulator::Config::getInstance()->getOffset();
+    float mapScale = PirateSimulator::Config::getInstance()->getMapScale();
     for(unsigned int i = 0; i < m_nbVertices; i++)
     {
         m_vertexMap[i].position().x(m_vertexMap[i].position().x() * mapScale);
