@@ -16,7 +16,8 @@ namespace FieldConverter
         {
         public:
             BadConfigFile() = delete;
-            BadConfigFile(const std::string &error) : std::runtime_error(error) {}
+            BadConfigFile(const std::string &error) : std::runtime_error(error)
+            {}
         };
 
     private:

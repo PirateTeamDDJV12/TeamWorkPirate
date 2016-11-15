@@ -23,7 +23,7 @@ namespace FieldConverter
 
 
     public:
-        Vertex() noexcept : 
+        Vertex() noexcept :
             m_position{},
             m_normal{},
             m_textureCoordinate{}

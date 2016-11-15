@@ -22,7 +22,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     float result1 = vect1.scalarProduct(vect2);
     float result2 = vect2.scalarProduct(vect1);
 
-    if (result1 != result2)
+    if(result1 != result2)
     {
         throw 1;
     }
@@ -32,7 +32,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
 
     Vect3f vect3 = Vect3f::crossProduct(vect1, vect2);
 
-    if ((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
+    if((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
     {
         throw 2;
     }
@@ -92,7 +92,7 @@ int main()
 
         //runTest(mapArray);
     }
-    catch (const std::exception &e)
+    catch(const std::exception &e)
     {
         std::cout << e.what() << std::endl;
         return 1;
