@@ -15,9 +15,9 @@ Created by Sun-lay Gagneux
 using namespace FieldConverter;
 
 
-HeightMap::HeightMap(const std::string& pathFile) :
-    m_width{DEFAULT_HEIGHTMAP_IMAGE_WIDTH},
-    m_height{DEFAULT_HEIGHTMAP_IMAGE_HEIGHT}
+HeightMap::HeightMap(const std::string& pathFile, unsigned h, unsigned w) :
+    m_width{w},
+    m_height{h}
 {
     m_totalSize = m_width * m_height;
 

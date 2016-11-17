@@ -74,7 +74,7 @@ int main()
     try
     {
         // Read the file and create an char array with the file informations
-        HeightMap heightmapFile(Config::getInstance()->getPath());
+        HeightMap heightmapFile(Config::getInstance()->getPath(), Config::getInstance()->getWidth(), Config::getInstance()->getHeight());
 
         // Create a vertex array (a map) from the heightmap and apply the offset and scale function
         VertexArray vArray = VertexArray(heightmapFile, Config::getInstance()->getScale(), Config::getInstance()->getTextureMappingRepetition());
