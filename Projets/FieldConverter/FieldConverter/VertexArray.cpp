@@ -4,7 +4,7 @@
 #include "Triangle.h"
 #include "TriangleArray.h"
 
-#include <stdlib.h>
+#include "Config/Config.hpp"
 using namespace FieldConverter;
 
 
@@ -20,7 +20,7 @@ VertexArray::VertexArray(const HeightMap& heightmap, float scale, unsigned int t
     // Change all the vertex to remove an useless offset
     offsetVertexMap();
 
-    // Scale all the vertex's zPos to not have 0 to 255 height
+    // Scale all the vertex's zPos to not have 0 to 255 height and apply offset if in config
     scaleVertexMap();
 }
 
@@ -28,49 +28,44 @@ std::map<unsigned, Vertex> VertexArray::transformToVertexMap(unsigned int textur
 {
     std::map<unsigned int, Vertex> myVertexMap;
     float row = 0;
-    if (textureRepeat == 0)
+    for(unsigned int i = 0; i < m_heightMap.size(); i++)
     {
-        for (unsigned int i = 0; i < m_heightMap.size(); i++)
+        if(i != 0 && i % m_heightMap.width() == 0)
         {
-            if (i != 0 && i % m_heightMap.width() == 0)
-            {
-                row++;
-            }
-            float col = i - (m_heightMap.width() * row);
-            float zPos = static_cast<float>(m_heightMap.at(i));
+            row++;
+        }
+        float col = i - (m_heightMap.width() * row);
+        float zPos = static_cast<float>(m_heightMap.at(i));
 
+        if(textureRepeat == 0)
+        {
             myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(
-                col, row, zPos, 
-                0.0f, 0.0f, 0.0f, 
+                col, row, zPos,
+                0.0f, 0.0f, 0.0f,
                 col / static_cast<float>(m_heightMap.width()), row / static_cast<float>(m_heightMap.height()))));
         }
-    }
-    else
-    {
-        for (unsigned int i = 0; i < m_heightMap.size(); i++)
+        else
         {
-            if (i != 0 && i % m_heightMap.width() == 0)
-            {
-                row++;
-            }
-            float col = i - (m_heightMap.width() * row);
-            float zPos = static_cast<float>(m_heightMap.at(i));
-
             myVertexMap.insert(std::pair<unsigned int, Vertex>(i, Vertex(
                 col, row, zPos,
                 0.0f, 0.0f, 0.0f,
                 col / static_cast<float>(textureRepeat), row / static_cast<float>(textureRepeat))));
         }
     }
-    
+
     return myVertexMap;
 }
 
 void VertexArray::scaleVertexMap()
 {
+    float offset = PirateSimulator::Config::getInstance()->getOffset();
+    float mapScale = PirateSimulator::Config::getInstance()->getMapScale();
     for(unsigned int i = 0; i < m_nbVertices; i++)
     {
+        m_vertexMap[i].position().x(m_vertexMap[i].position().x() * mapScale);
+        m_vertexMap[i].position().y(m_vertexMap[i].position().y() * mapScale);
         m_vertexMap[i].position().z(m_vertexMap[i].position().z() * m_scale);
+        m_vertexMap[i].position().z(m_vertexMap[i].position().z() - offset);
     }
 }
 
@@ -100,7 +95,7 @@ std::map<unsigned, Vertex> VertexArray::getVertexMap() const noexcept
 
 void VertexArray::computeNormal(const TriangleArray& mapping) noexcept
 {
-    for (int i = 0; i < mapping.numberOfPolygone(); i++)
+    for(int i = 0; i < mapping.numberOfPolygone(); i++)
     {
         Vect3f normale = this->computeNormalTriangle(mapping.at(i));
 
@@ -112,7 +107,7 @@ void VertexArray::computeNormal(const TriangleArray& mapping) noexcept
         m_vertexMap[mapping.at(i).thirdPointIndex()].normalVector() += normale;
     }
 
-    for (unsigned int iter = 0; iter < m_nbVertices; iter++)
+    for(unsigned int iter = 0; iter < m_nbVertices; iter++)
     {
         m_vertexMap[iter].normalVector() /= m_vertexMap[iter].normalVector().length();
     }

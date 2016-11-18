@@ -23,16 +23,21 @@ namespace FieldConverter
 
 
     public:
-        Vertex() noexcept : 
+        Vertex() noexcept :
             m_position{},
             m_normal{},
             m_textureCoordinate{}
         {}
 
         Vertex(float xPos, float yPos, float zPos, float xNormal, float yNormal, float zNormal, float uText, float vText) noexcept :
-            m_position{ xPos, yPos, zPos },
-            m_normal{ xNormal, yNormal, zNormal },
-            m_textureCoordinate{ uText, vText }
+        m_position{xPos, yPos, zPos},
+            m_normal{xNormal, yNormal, zNormal},
+            m_textureCoordinate{uText, vText}
+        {}
+        Vertex(float xPos, float yPos, float zPos, float xNormal, float yNormal, float zNormal) noexcept :
+            m_position{xPos, yPos, zPos},
+            m_normal{xNormal, yNormal, zNormal},
+            m_textureCoordinate{}
         {}
 
 

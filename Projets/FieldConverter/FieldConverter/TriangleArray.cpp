@@ -12,9 +12,8 @@ Created by Sun-lay Gagneux
 using namespace FieldConverter;
 
 
-TriangleArray::TriangleArray(size_t widthColumnVertex, size_t heightRowVertex) noexcept :
-    m_numberOfColumn{widthColumnVertex - 1},
-    m_numberOfRow{heightRowVertex - 1}
+TriangleArray::TriangleArray(size_t widthColumnVertex, size_t heightRowVertex) noexcept
+    : m_numberOfColumn{widthColumnVertex - 1}, m_numberOfRow{heightRowVertex - 1}
 {
     m_numberOfPolygone = 2 * m_numberOfColumn * m_numberOfRow;
 
@@ -24,19 +23,19 @@ TriangleArray::TriangleArray(size_t widthColumnVertex, size_t heightRowVertex) n
 }
 
 TriangleArray::TriangleArray(const TriangleArray& other) :
-    m_numberOfColumn{ other.m_numberOfColumn },
-    m_numberOfRow{ other.m_numberOfRow },
-    m_numberOfPolygone{ other.m_numberOfPolygone },
-    m_buffer{ new Triangle[other.m_numberOfPolygone] }
+    m_buffer{new Triangle[other.m_numberOfPolygone]},
+    m_numberOfPolygone{other.m_numberOfPolygone},
+    m_numberOfColumn{other.m_numberOfColumn},
+    m_numberOfRow{other.m_numberOfRow}
 {
     std::copy(other.begin(), other.end(), m_buffer);
 }
 
 TriangleArray::TriangleArray(TriangleArray&& other) :
-    m_numberOfColumn{ other.m_numberOfColumn },
-    m_numberOfRow{ other.m_numberOfRow },
-    m_numberOfPolygone{ other.m_numberOfPolygone },
-    m_buffer{ other.m_buffer }
+    m_buffer{other.m_buffer},
+    m_numberOfPolygone{other.m_numberOfPolygone},
+    m_numberOfColumn{other.m_numberOfColumn},
+    m_numberOfRow{other.m_numberOfRow}
 {
     other.m_buffer = nullptr;
 }
@@ -71,11 +70,11 @@ std::string TriangleArray::toString() const noexcept
 {
     std::string intermediary("");
 
-    std::for_each(begin(), 
-                  end(), 
+    std::for_each(begin(),
+                  end(),
                   [&intermediary, this](const Triangle& triangle) {
-                      intermediary += triangle.toString();
-                  }
+        intermediary += triangle.toString();
+    }
     );
 
     return intermediary;
@@ -103,7 +102,7 @@ Triangle TriangleArray::operator[](size_t index) const noexcept
 
 TriangleArray& TriangleArray::operator=(const TriangleArray& other)
 {
-    TriangleArray{ other }.swap(*this);
+    TriangleArray{other}.swap(*this);
 
     return *this;
 }
@@ -119,13 +118,13 @@ TriangleArray& TriangleArray::operator=(TriangleArray&& other)
 
 void TriangleArray::fillByTile(const Tile& tile, Triangle& upperTriangle, Triangle& downerTriangle) noexcept
 {
-    upperTriangle.firstPointIndex()   = tile.m_vertexDownLeft;
-    upperTriangle.secondPointIndex()  = tile.m_vertexUpLeft;
-    upperTriangle.thirdPointIndex()   = tile.m_vertexUpRight;
+    upperTriangle.firstPointIndex() = tile.m_vertexDownLeft;
+    upperTriangle.secondPointIndex() = tile.m_vertexUpLeft;
+    upperTriangle.thirdPointIndex() = tile.m_vertexUpRight;
 
-    downerTriangle.firstPointIndex()  = tile.m_vertexDownLeft; 
+    downerTriangle.firstPointIndex() = tile.m_vertexDownLeft;
     downerTriangle.secondPointIndex() = tile.m_vertexUpRight;
-    downerTriangle.thirdPointIndex()  = tile.m_vertexDownRight;
+    downerTriangle.thirdPointIndex() = tile.m_vertexDownRight;
 }
 
 void TriangleArray::fillFast(size_t widthColumnVertex) noexcept
@@ -142,7 +141,7 @@ void TriangleArray::fillFast(size_t widthColumnVertex) noexcept
         currentTile += (((currentTile % widthColumnVertex) == jumpMapping) ? 2 : 1);
     };
 
-    for (; current != endArray; current += 2)
+    for(; current != endArray; current += 2)
     {
         function(current);
     }

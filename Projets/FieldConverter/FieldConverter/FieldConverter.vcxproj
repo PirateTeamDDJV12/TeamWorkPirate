@@ -143,7 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BinaryFast.cpp" />
-    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Config\Config.cpp" />
     <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="VertexArray.cpp" />
@@ -155,7 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinaryFast.h" />
-    <ClInclude Include="Config.hpp" />
+    <ClInclude Include="Config\Config.hpp" />
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="TriangleArray.h" />

@@ -47,7 +47,7 @@ namespace FieldConverter
         to the loading image. Must be relative to the .exe and be careful, I'll throw
         if the file wasn't loaded correctly or some problems occur along the way.
         */
-        HeightMap(const std::string& pathFile);
+        HeightMap(const std::string& pathFile, unsigned h, unsigned w);
         HeightMap(const HeightMap& copy);
         HeightMap(HeightMap&& destructiveMovedSample) noexcept;
 

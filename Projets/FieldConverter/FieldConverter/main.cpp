@@ -6,13 +6,13 @@ Created by Sun-lay gagneux
 //#include "UnitaryTestTriangleArray.h"
 #include "VertexArray.h"
 #include "TriangleArray.h"
-#include "Config.hpp"
+#include "Config/Config.hpp"
 #include "HeightMap.h"
 #include <iostream>
 
 using namespace FieldConverter;
 using namespace std;
-using FieldConverter::Config;
+using PirateSimulator::Config;
 
 void run(const Vect3f& vect1, const Vect3f& vect2)
 {
@@ -22,7 +22,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
     float result1 = vect1.scalarProduct(vect2);
     float result2 = vect2.scalarProduct(vect1);
 
-    if (result1 != result2)
+    if(result1 != result2)
     {
         throw 1;
     }
@@ -32,7 +32,7 @@ void run(const Vect3f& vect1, const Vect3f& vect2)
 
     Vect3f vect3 = Vect3f::crossProduct(vect1, vect2);
 
-    if ((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
+    if((Vect3f::scalarProduct(vect3, vect1) != 0.f) || (Vect3f::scalarProduct(vect3, vect2) != 0.f))
     {
         throw 2;
     }
@@ -74,24 +74,24 @@ int main()
     try
     {
         // Read the file and create an char array with the file informations
-        HeightMap heightmapFile(Config::getInstance().getPath());
+        HeightMap heightmapFile(Config::getInstance()->getPath(), Config::getInstance()->getWidth(), Config::getInstance()->getHeight());
 
         // Create a vertex array (a map) from the heightmap and apply the offset and scale function
-        VertexArray vArray = VertexArray(heightmapFile, Config::getInstance().getScale(), Config::getInstance().getTextureMappingRepetition());
+        VertexArray vArray = VertexArray(heightmapFile, Config::getInstance()->getScale(), Config::getInstance()->getTextureMappingRepetition());
 
         // Create an triangle array
-        TriangleArray mapArray(Config::getInstance().getWidth(), Config::getInstance().getHeight());
+        TriangleArray mapArray(Config::getInstance()->getWidth(), Config::getInstance()->getHeight());
 
         // Compute the normals for each point.
         vArray.computeNormal(mapArray);
 
         // Write the vertex array and the triangle array in a file
-        heightmapFile.writeIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
+        heightmapFile.writeIntoOutputFile(Config::getInstance()->getExportName(), vArray.getVertexMap(), mapArray);
         //heightmapFile.writeBinaryIntoOutputFile("testOutput.txt", vArray.getVertexMap(), mapArray);
 
         //runTest(mapArray);
     }
-    catch (const std::exception &e)
+    catch(const std::exception &e)
     {
         std::cout << e.what() << std::endl;
         return 1;
