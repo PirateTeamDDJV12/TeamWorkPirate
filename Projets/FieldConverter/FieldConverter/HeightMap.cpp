@@ -127,7 +127,9 @@ void HeightMap::writeIntoOutputFile(const std::string& fileName, const std::map<
 
 void HeightMap::writeBinaryIntoOutputFile(const std::string& fileName, const std::map<unsigned int, Vertex>& vertexMap, const TriangleArray& triangleArray) const noexcept
 {
-    size_t totSize = 4 + vertexMap.size() * (sizeof(Vertex) + 4) + triangleArray.numberOfPolygone() * sizeof(Triangle);
+    // First +4 is here to save the vertexMap size
+    // Second +4 is the index of the vertex
+    size_t totSize = 4 + vertexMap.size() * sizeof(Vertex) + triangleArray.numberOfPolygone() * sizeof(Triangle);
 
     char* toWrite = new char[totSize];
 
@@ -140,13 +142,14 @@ void HeightMap::writeBinaryIntoOutputFile(const std::string& fileName, const std
     std::for_each(vertexMap.begin(),
                   vertexMap.end(),
                   [&toWrite, &iter, &binIntermediary](std::pair<unsigned int, Vertex> vert) {
-                        binIntermediary(vert.first, toWrite, iter);
                         binIntermediary(vert.second.position().x(), toWrite, iter);
                         binIntermediary(vert.second.position().y(), toWrite, iter);
                         binIntermediary(vert.second.position().z(), toWrite, iter);
                         binIntermediary(vert.second.normalVector().x(), toWrite, iter);
                         binIntermediary(vert.second.normalVector().y(), toWrite, iter);
                         binIntermediary(vert.second.normalVector().z(), toWrite, iter);
+                        binIntermediary(vert.second.getTextureCoordinate().m_U, toWrite, iter);
+                        binIntermediary(vert.second.getTextureCoordinate().m_V, toWrite, iter);
                   }
     );
 
